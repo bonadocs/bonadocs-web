@@ -1,0 +1,51 @@
+.markdown {
+  &__heading {
+    &__md {
+      font-size: 1.5rem;
+      padding: 0.5rem;
+      color: $text-color;
+      background-color: white;
+    }
+    &__active {
+      background-color: $active-link;
+      color: $heading-color;
+      font-weight: 600;
+      line-height: 2rem;
+      font-size: 1.5rem;
+      padding: 0.5rem;
+    }
+    &__preview {
+      font-size: 1.5rem;
+      padding: 0.5rem;
+      background-color: white;
+      color: $text-color;
+    }
+  }
+  &__container {
+    display: flex;
+    width: 100%;
+    padding: 1.6rem;
+    background-color: $active-link;
+    &__editor {
+      height: 27.2rem;
+      border: 1px solid $dermacate;
+      background-color: inherit;
+      font-size: 1.4rem;
+    }
+    &__preview {
+      height: 27.2rem;
+      overflow-y: auto;
+      width: 100%;
+      font-size: 1.4rem;
+      padding: 1.6rem;
+      border: 1px solid $dermacate;
+    }
+    &__code {
+      font-family: Consolas, "courier new";
+      color: crimson;
+      background-color: #f1f1f1;
+      padding: 2px;
+      font-size: 105%;
+    }
+  }
+}

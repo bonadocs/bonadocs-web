@@ -1,0 +1,325 @@
+.editor {
+  &__wrapper {
+    display: grid;
+    grid-template-columns: [start] 4% [start2] 11.3% [line2] auto [line3] 35% [end];
+    height: 100vh;
+    overflow: hidden;
+    &__sidebar {
+      display: flex;
+      flex-direction: column;
+      grid-column-start: start;
+      grid-column-end: line2;
+      width: 100%;
+      align-items: flex-start;
+      button {
+        border-radius: 50px;
+        width: 60%;
+        border: none;
+        background-color: black;
+        color: white;
+        height: 4rem;
+        font-size: 1.3rem;
+        //margin: 0 auto;
+      }
+    }
+    &__list {
+      display: grid;
+      grid-column-start: line2;
+      grid-column-end: line3;
+      align-items: flex-start;
+      flex-direction: column;
+      border-left: 1px solid $dermacate;
+      border-right: 1px solid $dermacate;
+      justify-items: flex-start;
+      height: inherit;
+    }
+  }
+}
+
+.wrapper {
+  width: 45%;
+  height: 60%;
+  margin: 25px;
+  outline: none;
+  display: flex;
+  padding: 20px;
+  background: #eceeee;
+  flex-direction: column;
+  border: 2px solid #ccc;
+  overflow: hidden;
+  overflow-y: auto;
+}
+.head {
+  width: 100%;
+  height: 40px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+}
+textarea {
+  padding: 1.6rem;
+  border: none;
+  outline: none !important;
+  width: 96%;
+  height: 100%;
+  overflow-x: hidden;
+  resize: none;
+}
+.markdown {
+  padding: 15px;
+  border: none;
+  outline: none !important;
+  width: 96%;
+  height: 100%;
+  resize: none;
+  overflow-x: hidden;
+  background: #fff;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+.list li {
+  margin: 0.75rem 0;
+}
+
+.info {
+  color: rgb(0, 49, 0);
+  background-color: rgb(230, 246, 230);
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.accordion {
+  border-top: 1px solid #ccc;
+  margin-top: 1rem;
+  &__selectors {
+    display: flex;
+    cursor: pointer;
+    &__item {
+      margin-right: 1rem;
+      margin-top: 1rem;
+      margin-left: 0.5rem;
+      padding: 0.5rem;
+      cursor: pointer;
+      &__active {
+        background-color: black;
+        color: white;
+      }
+    }
+  }
+}
+
+.item {
+  border-bottom: 1px solid #ccc;
+}
+
+.itemBtn {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 1rem;
+  font-size: 1rem;
+  text-align: left;
+  color: #007bff;
+  background-color: transparent;
+  border: none;
+}
+
+.szh-accordion {
+  overflow: auto;
+  height: calc(100vh - 17rem);
+  // min-height: 80%;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.szh-accordion__item-btn {
+  border: none;
+  background-color: inherit;
+  display: grid;
+  padding: 0.8rem;
+  width: 100%;
+  justify-self: left;
+
+  font-size: 1.4rem;
+  transition: height 0.25s cubic-bezier(0, 0, 0, 1);
+}
+
+.szh-accordion__item-btn {
+  display: flex;
+  justify-self: start;
+}
+
+.chevron-down {
+  margin-right: 0.4rem;
+  transition: transform 0.25s cubic-bezier(0, 0, 0, 1);
+}
+
+.szh-accordion__item--expanded {
+  .chevron-down {
+    transform: rotate(180deg);
+  }
+  .szh-accordion__item-btn {
+    border-bottom: none;
+    align-items: center;
+  }
+  .accordion {
+    &__container {
+      display: flex;
+      align-items: center;
+      font-size: 1.4rem;
+      color: $heading-color;
+      &__header {
+        color: $heading-color;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.accordion {
+  &__container {
+    display: flex;
+    align-items: center;
+    margin: 0.8rem 0;
+    width: 100%;
+    &__header {
+      color: $text-color;
+      font-weight: 400;
+      margin-right: auto;
+    }
+  }
+  &__container &__container__edit {
+    display: none;
+  }
+  &__container:hover &__container__edit {
+    display: flex;
+    align-self: center;
+  }
+  &__container &__container__delete {
+    display: none;
+  }
+  &__container:hover &__container__delete {
+    display: flex;
+    align-self: center;
+    margin-left: 1.6rem;
+  }
+  &__content {
+    &__container {
+      // overflow-x: hidden;
+      width: 100%;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+    }
+  }
+  &__wrapper {
+    //overflow: hidden;
+  }
+  &__item {
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 1.4rem;
+    color: $text-color;
+    padding: 0.8rem 0.8rem 0.8rem 4rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
+    &__active {
+      color: $heading-color;
+      border-right: 3px solid $blue;
+      background-color: $active-link;
+    }
+  }
+}
+
+.actions {
+  &__item {
+    border: none;
+    background-color: inherit;
+    display: grid;
+    padding-top: 3.2rem;
+    width: 100%;
+    padding-left: 2rem;
+    justify-self: left;
+    padding-bottom: 3.2rem;
+    border-bottom: 1px solid grey;
+    font-size: 1.4rem;
+    transition: height 0.25s cubic-bezier(0, 0, 0, 1);
+    font-weight: 700;
+  }
+}
+
+.variable {
+  border: 1px solid $dermacate;
+  &__title {
+    display: grid;
+    font-size: 2rem;
+    padding-top: 2.2rem;
+    padding-left: 2rem;
+    justify-self: left;
+    padding-bottom: 3.2rem;
+    height: 6.7rem;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  &__subtitle {
+    display: flex;
+    padding: 1.2rem 1.6rem 1.2rem 2.4rem;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 1.4rem;
+    color: #100a37;
+    font-weight: 600;
+    line-height: 2rem;
+  }
+  &__add {
+    margin-left: auto;
+    display: flex;
+  }
+  &__table {
+    &__header {
+      display: flex;
+      background-color: $table-header;
+      padding: 1.6rem;
+      gap: 2.4rem;
+      margin: 2.2rem 2.3rem 0 2.4rem;
+      &__item {
+        width: 24rem;
+        color: $bold-text;
+        font-weight: 600;
+      }
+      &__action {
+        color: $bold-text;
+        font-weight: 600;
+      }
+    }
+    &__item {
+      display: flex;
+      border-bottom: 1px solid $dermacate;
+      margin: 0 2.3rem 0 2.4rem;
+      padding: 1.6rem;
+      gap: 2.4rem;
+      align-items: center;
+      &__indi {
+        width: 24rem;
+        color: $text-color;
+      }
+      &__input {
+        outline: 1px solid $dermacate;
+        width: 24rem;
+        color: $text-color;
+        padding: 0.8rem;
+      }
+    }
+  }
+}

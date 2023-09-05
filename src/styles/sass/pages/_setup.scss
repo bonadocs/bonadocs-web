@@ -1,0 +1,160 @@
+.contract {
+  &__utils {
+    display: flex;
+    font-size: 2rem;
+    padding-left: 2rem;
+    justify-content: end;
+    padding-right: 2.4rem;
+    align-items: center;
+    height: 6.7rem;
+    border-bottom: 1px solid $dermacate;
+    &__button {
+      display: flex;
+      height: 4rem;
+      align-items: center;
+      padding: 0.8rem 1.6rem;
+      background-color: $blue;
+      color: white;
+      &__img {
+        margin-right: 0.4rem;
+      }
+      &__connect {
+        display: flex;
+        align-items: center;
+        background-color: $input-color;
+        color: $heading-color;
+        height: 4rem;
+        padding: 0.8rem 1.6rem;
+        margin-left: 1.6rem;
+      }
+    }
+  }
+  &__page {
+    display: grid;
+    grid-template-columns: [start] 10% [start2] 25% [line2] auto [line3] 35% [end];
+    margin-top: 2rem;
+    &__description {
+      display: flex;
+      flex-direction: column;
+      grid-column-start: start2;
+      grid-column-end: line2;
+      align-items: flex-start;
+      h3 {
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 30px;
+      }
+      h5 {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 30px;
+      }
+    }
+    &__info {
+      display: grid;
+      grid-column-start: line2;
+      grid-column-end: line3;
+      align-items: flex-start;
+      flex-direction: column;
+      &__text {
+        padding: 0.6rem 0;
+        font-family: "Satoshi";
+        label {
+          padding-right: 0.4rem;
+        }
+        input {
+          margin-left: 0.6rem;
+          margin-right: 0.3rem;
+        }
+        span {
+          font-size: 1.2rem;
+          font-weight: 500;
+          margin-left: 0.3rem;
+          line-height: 2.2rem;
+          letter-spacing: 0.014rem;
+          font-family: "Satoshi";
+          font-weight: 100;
+        }
+        td {
+          display: flex;
+          align-items: center;
+        }
+      }
+      h3 {
+        color: $heading-color;
+        font-weight: 700;
+        font-size: 1.3rem;
+        line-height: 2.2rem;
+      }
+      &__input {
+        width: 100%;
+        background-color: $input-color;
+        color: $input-text;
+        padding: 1.6rem;
+        font-size: 1.4rem;
+        &__select {
+          width: 100%;
+          padding: 1.6rem;
+          font-size: 1.4rem;
+          background-color: $input-color;
+          color: $input-text;
+          background-image: url("../../image/dropdown.svg");
+          background-repeat: no-repeat;
+          background-position-x: 97%;
+          background-position-y: 50%;
+        }
+      }
+      &__section {
+        display: flex;
+        padding: 1.4rem 0;
+        flex-direction: column;
+        align-items: flex-start;
+        &__area {
+          &__container {
+            display: flex;
+            padding-top: 1.4rem;
+            flex-direction: column;
+            align-items: flex-start;
+
+            textarea {
+              height: 25rem;
+            }
+          }
+        }
+        &__title {
+          margin-bottom: 1rem;
+          font-size: 1.8rem;
+        }
+        h3 {
+          font-size: 2rem;
+          font-weight: 600;
+          line-height: 28px;
+          color: $heading-color;
+        }
+        &__sub {
+          color: #475569;
+          margin-bottom: 2.4rem;
+        }
+      }
+      h5 {
+        font-weight: 500;
+        font-size: 1.4rem;
+        line-height: 19px;
+        padding-bottom: 0.5rem;
+      }
+      &__button {
+        cursor: pointer;
+        width: 50%;
+        border: none;
+        background-color: $blue;
+        color: white;
+        height: 5rem;
+        font-size: 1.3rem;
+        justify-self: end;
+        justify-self: end;
+        margin-bottom: 1.4rem;
+        margin-top: 2.4rem;
+      }
+    }
+  }
+}

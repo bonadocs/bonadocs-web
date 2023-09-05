@@ -1,0 +1,49 @@
+.sidebar {
+  &__header {
+    width: 100%;
+    border-bottom: 1px solid $dermacate;
+    padding: 1.83rem 2.4rem;
+    &__logo {
+      height: 2.4rem;
+    }
+  }
+
+  &__options {
+    margin-top: 2.4rem;
+    width: 100%;
+    &__active {
+      border-right: 3px solid $blue;
+      background-color: $active-link;
+    }
+    &__inactive {
+      background-color: transparent;
+    }
+    &__item {
+      font-size: 1.6rem;
+
+      color: $heading-color;
+      font-weight: 600;
+      line-height: 2.4rem;
+      text-decoration: none;
+      
+      margin-bottom: 1rem;
+      display: flex;
+      font-weight: 700;
+      padding: 1rem 0.8rem 1rem 2.4rem;
+      justify-self: left;
+      &__normal {
+        color: $sidebar-text;
+        font-size: 1.6rem;
+        font-weight: 600;
+        line-height: 2.4rem;
+        text-decoration: none;
+        
+        margin-bottom: 1rem;
+        display: flex;
+        font-weight: 700;
+        padding: 1rem 0.8rem 1rem 2.4rem;
+        justify-self: left;
+      }
+    }
+  }
+}

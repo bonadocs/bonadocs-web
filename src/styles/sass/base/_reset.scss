@@ -1,0 +1,254 @@
+// $grey: grey;
+// $white: white;
+// $black: black;
+// $dark-mint: #075e54;
+// $dark-light: #2a2f32;
+// $holder-background: #e5e5e5;
+// $dark-black: #e5e5e5;
+// $thin-font: 200;
+// $font-colour: #b1b3b5;
+// $holder-font-colour: #b3b6b8;
+// $holder-small-font-colour: #989a9d;
+// $text-font-family: Source Sans Pro;
+// $dark-scroll: #394045;
+// $text-font-colour: #6b7c93;
+// $small-font: 1.1rem;
+// $small: 300px;
+// $medium: 1200px;
+// $large: 2000px;
+// $mint: #056162;
+$heading-color: #100a37;
+$bold-text: #13212f;
+$text-color: #475569;
+$input-color: #f3f6f8;
+$active-link: #f8fafc;
+$input-text: #475569;
+$blue: #055df5;
+$sidebar-text: #64748b;
+$dermacate: #e2e8f0;
+$tooltip-bg: #f1f5f9;
+$table-header: #eef2f5;
+
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro&display=swap");
+@import "//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css";
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+div,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+button,
+textarea,
+input,
+select,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  //   //font-size: 100%;
+  //   font: inherit;
+  //   vertical-align: baseline;
+  //   margin-block-start: 0;
+  //   margin-block-end: 0;
+  //   display: block;
+  font-family: "Sora", sans-serif;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2rem;
+  // color: $font-colour;
+  //   outline: 2px solid red;
+}
+
+html {
+  font-size: 62.5%;
+  @media screen and (max-width: 1300px) {
+    font-size: 55%;
+  }
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  //display: block;
+}
+body {
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  //text-align: center;
+  background-color: white;
+  height: 100vh;
+
+  @media screen and (max-width: 320px) {
+    margin: 0.2rem;
+  }
+}
+ol,
+ul {
+  list-style: none;
+}
+button,
+textarea,
+input,
+select {
+  text-decoration: none;
+  -moz-appearance: none; /* Firefox */
+  -webkit-appearance: none; /* Safari and Chrome */
+  //appearance: none;
+  outline: none;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+hr {
+  width: 100%;
+  border: 0.5px solid #e2e8f0;
+}
+.graphical-radio {
+  border: 1px solid gray;
+  display: inline-block;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 100%;
+}
+
+input[type="radio"]:checked + .graphical-radio {
+  background-color: #475569;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+input {
+  //   text-decoration: none;
+  //   -webkit-appearance: none;
+  //   outline: none;
+  align-self: center;
+
+  //   &::focus {
+  //     background-position: 40% 50%;
+  //   }
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.ReactModal__Body--open {
+  overflow: hidden;
+}
+
+.mt {
+  margin-top: 1rem;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.z-10 {
+  z-index: 10;
+}

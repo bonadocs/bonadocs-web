@@ -1,0 +1,200 @@
+.method {
+  width: 70%;
+  &__result {
+    display: flex;
+    height: 5rem;
+    border-bottom: 1px solid $dermacate;
+    align-items: center;
+    padding: 0 0.8rem 0 1.6rem;
+    &__name {
+      color: $input-text;
+      font-weight: 600;
+    }
+    &__value {
+      overflow-y: auto;
+      width: 50%;
+      background-color: #f3f6f8;
+      color: $heading-color;
+      font-size: 1.4rem;
+      height: min-content;
+      margin-left: auto;
+      padding: 0.4rem 0.4rem 0.4rem 0.8rem;
+    }
+  }
+  &__parameters {
+    margin: 1.6rem 0 0 1.6rem;
+    height: calc(100vh - 47rem);
+    margin-bottom: 4rem;
+    overflow: auto;
+
+    &__title {
+      font-weight: 600;
+    }
+    &__input {
+      background-color: $active-link;
+      margin-left: 2.4rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.4rem;
+      width: 100%;
+    }
+    &__select {
+      padding: 1.6rem;
+      font-size: 1.4rem;
+      background-color: $input-color;
+      color: $input-text;
+      background-image: url("../../image/dropdown.svg");
+      background-repeat: no-repeat;
+      background-position-x: 97%;
+      background-position-y: 50%;
+      &__title {
+        font-weight: 600;
+      }
+    }
+    &__name {
+      color: $text-color;
+      padding: 0.6rem 0;
+      width: 90%;
+      margin: 0 auto;
+      display: flex;
+      white-space: nowrap;
+    }
+  }
+  &__title {
+    display: flex;
+    padding: 1.2rem 1.6rem 1.2rem 2.4rem;
+    border-bottom: 1px solid $dermacate;
+    font-size: 1.4rem;
+    color: $heading-color;
+    font-weight: 600;
+    line-height: 2rem;
+  }
+  &__list {
+    &__container {
+      justify-items: left;
+      width: 100%;
+      &__contracts {
+        height: 100vh;
+        // border-right: 1px solid $dermacate;
+        display: flex;
+        &__select {
+          width: 22rem;
+
+          border-right: 1px solid $dermacate;
+          overflow-x: hidden;
+          &__title {
+            display: flex;
+            align-items: center;
+            padding: 1.2rem 1.6rem 1.2rem 2.4rem;
+            border-bottom: 1px solid $dermacate;
+
+            h3 {
+              color: $heading-color;
+              font-size: 1.4rem;
+              font-weight: 600;
+            }
+            img {
+              margin-left: auto;
+              cursor: pointer;
+            }
+          }
+        }
+        &__section {
+          margin: 1.6rem 1.6rem 0 1.6rem;
+          padding: 0.4rem;
+          display: flex;
+          background-color: $input-color;
+          &__option {
+            width: 50%;
+            color: $heading-color;
+            padding: 0.4rem;
+            font-size: 1.4rem;
+            display: flex;
+            justify-content: center;
+            h4 {
+              cursor: pointer;
+            }
+            &__active {
+              background-color: white;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+      &__name {
+        display: grid;
+        font-size: 2rem;
+        padding-top: 2.2rem;
+        padding-left: 2rem;
+        justify-self: left;
+        padding-bottom: 3.2rem;
+        height: 6.7rem;
+        border-bottom: 1px solid $dermacate;
+      }
+      &__item {
+        display: grid;
+        padding-top: 3.2rem;
+        padding-left: 2rem;
+        justify-self: left;
+        padding-bottom: 3.2rem;
+        border-bottom: 1px solid grey;
+        font-size: 1.4rem;
+        font-weight: 700;
+      }
+    }
+  }
+  &__item {
+    &__button {
+      display: flex;
+      align-items: center;
+      padding: 0.8rem 1.6rem;
+      background-color: #055df5;
+      color: white;
+      margin-left: auto;
+      margin-right: 3.2rem;
+    }
+
+    &__title {
+      padding: 1rem;
+    }
+    &__description {
+      padding-top: 0;
+      padding: 1rem;
+    }
+
+    &__param {
+      display: flex;
+      margin-left: 0.5rem;
+      h6 {
+        font-size: 1.6rem;
+        margin: 0.7rem;
+      }
+      input {
+        padding: 0.5rem;
+        margin-left: 1rem;
+      }
+    }
+    &__heading {
+      margin: 2rem 0;
+      margin-left: 0.5rem;
+      font-size: 2rem;
+    }
+    &__response {
+      display: flex;
+      width: 24.5%;
+      font-size: 1rem;
+      margin: 1rem;
+      h3 {
+        margin-right: 1rem;
+      }
+      &__cover {
+        width: 500px;
+        height: 100px;
+        white-space: nowrap;
+        position: relative;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+      }
+    }
+  }
+}

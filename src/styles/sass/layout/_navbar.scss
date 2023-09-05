@@ -1,0 +1,16 @@
+.contract {
+  &__page {
+    &__navbar {
+      grid-column-start: start2;
+      grid-column-end: end;
+      height: min-content;
+      display: flex;
+      align-items: flex-start;
+      min-height: 8.4rem;
+      &__logo {
+        height: 3.2rem;
+        align-self: center;
+      }
+    }
+  }
+}
