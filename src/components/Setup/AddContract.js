@@ -12,6 +12,7 @@ export const AddContract = ({
   closeModal,
 }) => {
   const [checked, setChecked] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [project, setProject] = useState({
     contractName: "",
     description: "",
@@ -23,10 +24,9 @@ export const AddContract = ({
   const setCurrentMethod = useBonadocsStore((state) => state.setCurrentMethod);
   const initiateProject = useBonadocsStore((state) => state.initiateProject);
   const addContract = useBonadocsStore((state) => state.addContract);
-  const loadingRef = useRef()
+  const loadingRef = useRef(false)
   const submitProject = async () => {
-     loadingRef.current = true
-          console.log(loadingRef.current);
+     setLoading(!loading);
     let jsonRpcUrl, projectValidated;
     chains.map(([key, value]) => {
       if (key === project.network) {
@@ -42,9 +42,10 @@ export const AddContract = ({
           : validate({ ...requiredProject, projectName });
       console.log(projectValidated);
       console.log("project");
-      !projectValidated && ( loadingRef.current = false )
+      !projectValidated && setLoading(false);
+      console.log(loading);
       projectValidated &&
-        initiateProject(
+        await initiateProject(
           projectName,
           project.contractName,
           project.description,
@@ -55,7 +56,7 @@ export const AddContract = ({
           checked
         );
       setCurrentMethod(null)
-       loadingRef.current = false; 
+      setLoading(false);
     } else {
       projectValidated =
         checked !== true
@@ -63,7 +64,7 @@ export const AddContract = ({
           : validate({ ...requiredProject });
       console.log(projectValidated);
       console.log("contract");
-      !projectValidated && (loadingRef.current = false);
+      !projectValidated && setLoading(false);
       if (projectValidated) {
         const close = await addContract(
           project.contractName,
@@ -76,12 +77,14 @@ export const AddContract = ({
         );
         console.log(close);
         close && closeModal();
-        loadingRef.current = false;
+        setLoading(false);
       }
     }
 
     // navigate("/editor");
   };
+
+  useEffect((()=> {console.log(loading);}),[loading])
   return (
     <>
       <div className="contract__page__info__section">
@@ -189,17 +192,20 @@ export const AddContract = ({
 
       <button
         onClick={() => {
-          loadingRef.current = true
-          console.log(loadingRef.current);
+          //setLoading(!loading)
           submitProject();
         }}
-        disabled={loadingRef.current}
+        disabled={loading}
         className="contract__page__info__button"
       >
-        {!loadingRef.current ? (
-          <Bars className="loader__bars" />
+        {!loading ? (
+          <>
+            {newProject
+              ? `Initiate Project${loading}`
+              : `Add Contract`}
+          </>
         ) : (
-          <>{newProject ? `Initiate Project` : `Add Contract`}</>
+          <Bars className="loader__bars" />
         )}
       </button>
 
