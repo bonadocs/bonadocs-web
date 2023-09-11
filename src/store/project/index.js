@@ -7,6 +7,7 @@ export const projectStore = persist(
   (set, get) => ({
     collection: null,
     readContract: async (address, chainId) => {
+      let responseAbi;
       try {
         const responseAbi = await loadContractSpec(
           process.env.REACT_APP__LOAD,
@@ -16,11 +17,11 @@ export const projectStore = persist(
         if (responseAbi == null) {
           toast("Cannot retrieve verified contract. Try adding your ABI");
         }
-        return responseAbi;
       } catch (error) {
         console.log(error);
-        toast(`Confirm your ${error}`);
+        toast(`Confirm your Cannot retrieve verified contract. ${error}`);
       }
+      return responseAbi;
     },
     updateProject: async (collection) => {
       set({
@@ -70,7 +71,7 @@ export const projectStore = persist(
         console.log(Collection.fromData(project.getSnapshot()));
         history.navigate("/editor/method");
       } catch (err) {
-        toast(`Confirm your ${err}`);
+        toast(`${err}`);
       }
     },
   }),
