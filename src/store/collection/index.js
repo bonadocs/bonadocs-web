@@ -12,7 +12,7 @@ export const collectionStore = (set, get) => ({
   setCurrentResult: (result) => set(() => ({ currentResult: result })),
   setShowResult: (show) => set(() => ({ showResult: show })),
   setCurrentMethod: (method) => {
-    set(() => ({ currentMethod: method }))
+    set(() => ({ currentMethod: method }));
     if (method == null) {
       window.localStorage.removeItem("current");
     }
@@ -24,8 +24,8 @@ export const collectionStore = (set, get) => ({
       useBonadocsStore
         .getState()
         .updateProject(useBonadocsStore.getState().collection);
-      
-      toast.success(`Contract deleted`);
+
+      toast(`Contract deleted`);
       set({
         latestContract: "",
       });
@@ -36,9 +36,8 @@ export const collectionStore = (set, get) => ({
       // );
 
       if (id === get().currentMethod[1].contract) {
-        get().setCurrentMethod(null)
+        get().setCurrentMethod(null);
       }
-        
     } catch (err) {
       toast(err);
     }
@@ -57,9 +56,8 @@ export const collectionStore = (set, get) => ({
         verified !== true
           ? abi
           : await useBonadocsStore.getState().readContract(address, chainId);
-      
+
       if (contractAbi) {
-      
         useBonadocsStore.getState().collection.addContract({
           name: contractName,
           address,
