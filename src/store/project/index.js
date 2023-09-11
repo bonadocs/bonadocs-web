@@ -16,7 +16,7 @@ export const projectStore = persist(
         );
 
         if (responseAbi == null) {
-          toast("dge")
+          
         }
         
       } catch (error) {
