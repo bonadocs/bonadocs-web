@@ -35,7 +35,6 @@ export const AccordionContent = ({ methods, read }) => {
                 .map((item, index) => (
                   <div key={index} className="accordion__item__wrapper">
                     <a
-                      href=""
                       data-tooltip-id={`my-tooltip-inline${index}`}
                       data-tooltip-content={`${item[1].name}`}
                     >
@@ -43,7 +42,6 @@ export const AccordionContent = ({ methods, read }) => {
                         ref={ref}
                         onClick={() => {
                           setCurrentMethod(item);
-                         
                         }}
                         className={clsx(
                           active(item[1].name) && "accordion__item__active",
@@ -83,7 +81,6 @@ export const AccordionContent = ({ methods, read }) => {
                         ref={ref}
                         onClick={() => {
                           setCurrentMethod(item);
-                         
                         }}
                         key={index}
                         className={clsx(
