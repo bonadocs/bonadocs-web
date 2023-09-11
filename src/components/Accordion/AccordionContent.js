@@ -6,7 +6,7 @@ import { Tooltip } from "react-tooltip";
 export const AccordionContent = ({ methods, read }) => {
   useEffect(() => {
     setContractMethod(methods);
-    console.log(read);
+    
   }, []);
   const [contractMethod, setContractMethod] = useState([]);
   const ref = useRef(null);

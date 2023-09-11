@@ -19,14 +19,9 @@ import { MethodItemInput } from "./MethodItemInput";
 export const MethodListItem = ({ header, read, methods, index }) => {
   const [contractDescription, setContractDescription] = useState("");
   const collection = useBonadocsStore((state) => state.collection);
-  const setDeleteContract = useBonadocsStore(
-    (state) => state.setDeleteContract
-  );
 
   useEffect(() => {
     setContractDescription("");
-
-    console.log(collection.data.contracts);
     collection.data.contracts.forEach((item) => {
       if (header === item.id) {
         typeof item.docs === "string" && setContractDescription(item);
@@ -62,7 +57,6 @@ const AccordionItem = ({ name, id, ...rest }) => {
   }, [latestName]);
 
   const toogleInput = () => {
-    console.log("trigger");
     setShowEdit(false);
   };
 
@@ -102,12 +96,8 @@ const AccordionItem = ({ name, id, ...rest }) => {
   };
   const editContract = (event) => {
     if (event.key === "Enter") {
-      console.log(id, contractName);
-
       collection.renameContract(id, contractName);
-      console.log(collection);
       updateProject(collection);
-
       setShowEdit(!showEdit);
     }
   };

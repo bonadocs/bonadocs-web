@@ -31,7 +31,7 @@ export const AddLink = ({ className }) => {
             try {
               setLoading(true);
               const collection = await Collection.fromIpfs(link);
-              console.log(collection);
+              
               updateProject(collection);
               setCurrentMethod(null);
               history.navigate("/editor/method");

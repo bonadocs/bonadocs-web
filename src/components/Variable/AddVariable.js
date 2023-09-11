@@ -31,7 +31,7 @@ export const AddVariable = ({ isOpen, setIsOpen }) => {
           syncedValue: syncedVariable,
         });
         updateProject(collection);
-        console.log(collection);
+      
         setIsOpen(!isOpen);
           toast.success(`Variable succcesfully added`);
           setLoading(false);

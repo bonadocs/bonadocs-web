@@ -57,16 +57,9 @@ export const collectionStore = (set, get) => ({
         verified !== true
           ? abi
           : await useBonadocsStore.getState().readContract(address, chainId);
-      console.log(contractAbi);
+      
       if (contractAbi) {
-        console.log({
-          name: contractName,
-          address,
-          chainCode: chainId,
-          jsonRpcUrl: jsonRpcUrl,
-          spec: contractAbi,
-          docs,
-        });
+      
         useBonadocsStore.getState().collection.addContract({
           name: contractName,
           address,

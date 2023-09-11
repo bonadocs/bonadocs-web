@@ -91,15 +91,9 @@ function App() {
   useEffect(() => {
     const data = window.localStorage.getItem("current");
     if (data !== null) {
-      // const method = JSON.parse(data);
-      // const available = collection.data.contracts.find(
-      //   (item) => item.id === method[1].contract
-      // );
-      // available &&
-        
         setCurrentMethod(JSON.parse(data));
 
-      console.log(currentMethod);
+      
     }
   }, []);
   return (

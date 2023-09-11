@@ -34,20 +34,9 @@ export const MethodParam = () => {
         values
       );
     });
-    // console.log(values);
-    // values.forEach((value) => {
-    //   console.log(
-    //     collection.getInputParamAtPath(
-    //       method.contract,
-    //       method.dataKey,
-    //       value.path
-    //     )
-    //   );
-    // });
 
     updateProject(collection);
     setResult(values);
-    console.log(result);
   };
 
   var str2bool = (value) => {
@@ -65,9 +54,6 @@ export const MethodParam = () => {
     });
 
     updateProject(collection);
-
-    //setResult(result);
-    //console.log(result);
   };
 
   const paramSegment = (
@@ -87,10 +73,7 @@ export const MethodParam = () => {
       ? param.name
       : `${path}.${param.name}`;
 
-    console.log(paramPath);
     if (param.components) {
-      console.log(indent, param.name, param.baseType, paramPath);
-
       values.push({
         indent,
         index: values.length,
@@ -128,13 +111,7 @@ export const MethodParam = () => {
       });
 
       // revert back for dynamic array
-      console.log(
-        indent,
-        param.name,
-        param.baseType,
-        paramPath,
-        generatedCount
-      );
+
       const arrayIndex = values.length;
       values.push({
         indent,
@@ -165,9 +142,7 @@ export const MethodParam = () => {
       }
       return;
     }
-    console.log(indent, param.name, param.baseType, paramPath);
-    // result.push({ indent, name: param.name, baseType: param.baseType });
-    // param.baseType === "bool" ? true : ""
+
     values.push({
       indent,
       index: values.length,
@@ -188,9 +163,8 @@ export const MethodParam = () => {
   }
 
   function getFinalParams(result) {
-    console.log(getCurrentMethod[1]);
     if (validateParams(validateResult()) !== true) return;
-    //console.log(dataResult);
+
     var root = {
       children: [],
       level: -1,
@@ -248,7 +222,6 @@ export const MethodParam = () => {
       }
       level = item.indent;
     }
-    console.log(arrayifyTree(root));
     return arrayifyTree(root);
   }
 
@@ -258,14 +231,12 @@ export const MethodParam = () => {
       param.data !== undefined &&
         dataResult.push({ data: param.data, name: param.name });
     });
-    console.log(dataResult);
     return dataResult;
   };
   const queryMethod = async () => {
     try {
-      console.log(result);
       if (validateParams(validateResult()) !== true) return;
-      console.log(getCurrentMethod);
+
       const method = getCurrentMethod[1];
       const signature = method.fullSignature;
 
@@ -286,12 +257,10 @@ export const MethodParam = () => {
           },
           { jsonResult: true }
         );
-        console.log(res);
 
         setCurrentResult(res);
         setShowResult(true);
       } else {
-        console.log({ contractName: method, data });
         res = await collection.runFunction(
           {
             contractId: method.contract,
@@ -300,13 +269,11 @@ export const MethodParam = () => {
           { jsonResult: true }
         );
 
-        console.log(res);
         setCurrentResult(res);
         setShowResult(true);
       }
     } catch (err) {
       toast.error(`${err}`);
-      console.log(err);
     }
   };
 
@@ -388,7 +355,7 @@ export const MethodParam = () => {
       arrayDefinitionIndex
     );
     updateProject(collection);
-    console.log(result);
+
     setResult([...result]);
   }
   function deleteAtSpecificIndex(
@@ -400,12 +367,11 @@ export const MethodParam = () => {
     indexToDelete,
     docKey
   ) {
-    console.log("id", contractName);
     const arrayDefinition = paramSegments[arrayDefinitionIndex];
     if (!arrayDefinition) {
       throw new Error("Invalid selection for add element");
     }
-    console.log(arrayDefinition.baseType);
+
     if (arrayDefinition.baseType !== "array" || arrayDefinition.length !== -1) {
       throw new Error("Selected element is not a dynamic array");
     }
@@ -422,7 +388,6 @@ export const MethodParam = () => {
     const generatedCount = Number(
       collection.getString(functionDataKey, arrayDefinition.path)
     );
-    console.log("generatedcount", generatedCount);
     for (let i = indexToDelete; i < generatedCount; i++) {
       if (i === generatedCount - 1) {
         collection.deleteEntireSubPath(
@@ -430,10 +395,7 @@ export const MethodParam = () => {
           arrayDefinition.path + "." + i
         );
 
-        collection.deleteEntireSubPath(
-          docKey,
-          arrayDefinition.path + "." + i
-        );
+        collection.deleteEntireSubPath(docKey, arrayDefinition.path + "." + i);
       } else {
         collection.replaceEntireSubPath(
           functionDataKey,
@@ -448,7 +410,6 @@ export const MethodParam = () => {
           arrayDefinition.path + "." + i,
           false
         );
-
       }
     }
     modifyArrayElements(
@@ -461,7 +422,6 @@ export const MethodParam = () => {
     );
 
     updateProject(collection);
-    console.log(result);
     setResult([...result]);
   }
 
@@ -535,22 +495,6 @@ export const MethodParam = () => {
           Query {getCurrentMethod[1].name}
         </button>
       </div>
-
-      {/* <button onClick={async () => console.log(await collection.save())}>
-        save
-      </button>
-      <button
-        onClick={async () => {
-
-          console.log(
-            await Collection.fromIpfs(
-              "ipfs://bafkreiaxcv4mzwjj2u4ykze4iy6j6mogbqkptqap5ksnxxcc5o5ioxausa"
-            )
-          );
-        }}
-      >
-        retreive
-      </button> */}
     </div>
   );
 };
@@ -583,7 +527,7 @@ export const ParamsList = ({
     >
       <h3 key={i} className={clsx("method__parameters__name")}>
         {!showDocs ? (
-          <img  onClick={() => setShowDocs(!showDocs)} src={docsClose} />
+          <img onClick={() => setShowDocs(!showDocs)} src={docsClose} />
         ) : (
           <img onClick={() => setShowDocs(!showDocs)} src={docsOpen} />
         )}
@@ -648,17 +592,17 @@ export const ParamsList = ({
         )}
       </h3>
 
-      {
-       showDocs && <TextInput
-        dataKey={method.docKey}
-        className="method__parameters__input__docs"
-        path={path}
-        name={name}
-        baseType={baseType}
-        collection={collection}
-        docs={true}
-      />
-     } 
+      {showDocs && (
+        <TextInput
+          dataKey={method.docKey}
+          className="method__parameters__input__docs"
+          path={path}
+          name={name}
+          baseType={baseType}
+          collection={collection}
+          docs={true}
+        />
+      )}
     </div>
   );
 };

@@ -13,7 +13,6 @@ export const Variable = () => {
   const collection = useBonadocsStore((state) => state.collection);
   const updateProject = useBonadocsStore((state) => state.updateProject);
   const [values, setValues] = useState(collection.data.variables);
-  console.log(JSON.stringify(collection.data.variables));
 
   const edit = (e, index) => {
     collection.data.variables[index].syncedValue = e.target.value;

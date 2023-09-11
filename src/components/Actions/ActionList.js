@@ -21,7 +21,6 @@ export const ActionList = ({ className }) => {
     if (!collection) {
       return;
     }
-    console.log(collection.displayData.size);
     setContracts(groupByContract(Array.from(collection.displayData)));
   }, [latestContract]);
 

@@ -39,7 +39,6 @@ export const SidebarButton = () => {
   };
   function openModal() {
     setIsOpen(true);
-    console.log(location);
   }
 
   function afterOpenModal() {
@@ -53,12 +52,9 @@ export const SidebarButton = () => {
 
   const collection = useBonadocsStore((state) => state.collection);
   useEffect(() => {
-    console.log("collection");
     if (!collection) {
       return;
     }
-
-    console.log("collection is instance of:", collection instanceof Collection);
   }, [collection]);
 
   return (
@@ -90,19 +86,21 @@ export const SidebarButton = () => {
           )}
         </div>
       </Modal>
-      {!hide && <>
-        {mode ? (
-          <button onClick={openModal} className="contract__utils__button">
-            <img className="contract__utils__button__img" src={plus} />
-            Add Contract
-          </button>
-        ) : (
-          <button onClick={openModal} className="contract__utils__button">
-            <img className="contract__utils__button__img" src={plus} />
-            Add Actions
-          </button>
-        )}
-      </>}
+      {!hide && (
+        <>
+          {mode ? (
+            <button onClick={openModal} className="contract__utils__button">
+              <img className="contract__utils__button__img" src={plus} />
+              Add Contract
+            </button>
+          ) : (
+            <button onClick={openModal} className="contract__utils__button">
+              <img className="contract__utils__button__img" src={plus} />
+              Add Actions
+            </button>
+          )}
+        </>
+      )}
     </>
   );
 };

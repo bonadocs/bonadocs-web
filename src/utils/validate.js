@@ -13,7 +13,7 @@ export const validate = (variables) => {
 
 export const validateParams = (variables) => {
   let result = true;
-  console.log(variables);
+  
   variables.forEach((variable) => {
     if (/^\s*$/.test(variable.data)) {
       toast(`Confirm your ${variable.name}`);

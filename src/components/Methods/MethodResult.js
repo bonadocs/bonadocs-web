@@ -18,7 +18,7 @@ export const MethodResult = () => {
     setContractDescription("");
     if (getCurrentMethod) {
       let chain;
-      console.log(collection.data.contracts);
+      
       collection.data.contracts.forEach((item) => {
         if (getCurrentMethod[1].contract === item.id) {
           if (typeof item.docs === "string") {
@@ -28,14 +28,14 @@ export const MethodResult = () => {
           }
         }
       });
-      console.log(chain);
+      
       if (chain) {
         const s = chains.find(
         ([key, value]) => key == chain.chainCode
       );
       if (s) {
         setCurrentNetwork(s[1].chain);
-        console.log(currentNetwork);
+       
       }
       }
       

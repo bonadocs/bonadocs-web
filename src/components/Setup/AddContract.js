@@ -40,10 +40,10 @@ export const AddContract = ({
         checked !== true
           ? validate({ ...requiredProject, abi, projectName })
           : validate({ ...requiredProject, projectName });
-      console.log(projectValidated);
-      console.log("project");
+     
+      
       !projectValidated && setLoading(false);
-      console.log(loading);
+      
       projectValidated &&
         await initiateProject(
           projectName,
@@ -62,8 +62,7 @@ export const AddContract = ({
         checked !== true
           ? validate({ ...requiredProject, abi })
           : validate({ ...requiredProject });
-      console.log(projectValidated);
-      console.log("contract");
+     
       !projectValidated && setLoading(false);
       if (projectValidated) {
         const close = await addContract(
@@ -75,7 +74,7 @@ export const AddContract = ({
           checked,
           project.description
         );
-        console.log(close);
+       
         close && closeModal();
         setLoading(false);
       }
@@ -84,7 +83,7 @@ export const AddContract = ({
     // navigate("/editor");
   };
 
-  useEffect((()=> {console.log(loading);}),[loading])
+  useEffect((() => { }),[loading])
   return (
     <>
       <div className="contract__page__info__section">

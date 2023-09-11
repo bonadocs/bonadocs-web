@@ -29,9 +29,7 @@ export const MethodList = ({ className }) => {
     if (!collection) {
       return;
     }
-    console.log(Array.from(collection.displayData));
     setContracts(groupByContract(Array.from(collection.displayData)));
-    console.log(groupByContract(Array.from(collection.displayData)));
   }, [latestContract]);
   return (
     <div className={className}>

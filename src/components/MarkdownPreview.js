@@ -23,12 +23,10 @@ export default function LiveMarkdown() {
   };
 
   useEffect(() => {
-    console.log(collection);
     const docValue = collection.getString(
       getCurrentMethod[1].docKey,
       getCurrentMethod[1].path
     );
-    console.log(docValue);
     if (docValue) {
       setMarkdownInput(docValue);
     } else setMarkdownInput(getCurrentMethod[1].fullSignature);

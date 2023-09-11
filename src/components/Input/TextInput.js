@@ -21,7 +21,6 @@ export const TextInput = ({
       subPath: path,
       value: "",
     });
-    console.log(collection);
     updateProject(collection);
   }
 
@@ -39,27 +38,10 @@ export const TextInput = ({
             subPath: path,
             value: event.target.value,
           });
-          console.log(collection);
           updateProject(collection);
           setText(event.target.value);
         }}
       />
-      {/* 
-      <input
-        placeholder={name ? `${name} documentation` : baseType}
-        value={docValue || ""}
-        className={className}
-        onChange={(event) => {
-          collection.updateString({
-            key: docKey,
-            subPath: path,
-            value: event.target.value,
-          });
-          console.log(collection);
-          updateProject(collection);
-          setText(event.target.value);
-        }}
-      /> */}
     </>
   );
 };
