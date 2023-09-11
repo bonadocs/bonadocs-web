@@ -4,13 +4,7 @@ import { Editor } from "./pages/Editor";
 import { ProtectedRoute } from "./utils/ProtectedRoute";
 import Modal from "react-modal";
 import { MethodWrapper } from "./components/Methods/MethodWrapper";
-import {
-  Routes,
-  Route,
-  Navigate,
-  useNavigate,
-  useLocation,
-} from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { history } from "./_helpers/history";
 import { ToastContainer } from "react-toastify";
 import { useEffect } from "react";
@@ -37,7 +31,6 @@ import {
   polygonMumbai,
   arbitrumGoerli,
 } from "wagmi/chains";
-import { alchemyProvider } from "wagmi/providers/alchemy";
 import { useBonadocsStore } from "./store";
 import { publicProvider } from "wagmi/providers/public";
 import { ActionWrapper } from "./components/Actions/ActionWrapper";
@@ -84,18 +77,19 @@ Modal.setAppElement("#root");
 function App() {
   history.navigate = useNavigate();
   history.location = useLocation();
-  const navigate = useNavigate();
-  const collection = useBonadocsStore((state) => state.collection);
   const setCurrentMethod = useBonadocsStore((state) => state.setCurrentMethod);
-  const currentMethod = useBonadocsStore((state) => state.CurrentMethod);
   useEffect(() => {
+    initiateMethod();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const initiateMethod = () => {
     const data = window.localStorage.getItem("current");
     if (data !== null) {
-        setCurrentMethod(JSON.parse(data));
-        console.log(JSON.parse(data));
-      
+      setCurrentMethod(JSON.parse(data));
+      console.log(JSON.parse(data));
     }
-  }, []);
+  }
   return (
     <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider chains={chains}>

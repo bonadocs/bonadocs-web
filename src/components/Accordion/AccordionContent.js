@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useLayoutEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import clsx from "clsx";
 import { useBonadocsStore } from "../../store";
 import { Tooltip } from "react-tooltip";
@@ -6,7 +6,7 @@ import { Tooltip } from "react-tooltip";
 export const AccordionContent = ({ methods, read }) => {
   useEffect(() => {
     setContractMethod(methods);
-    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const [contractMethod, setContractMethod] = useState([]);
   const ref = useRef(null);
@@ -35,6 +35,7 @@ export const AccordionContent = ({ methods, read }) => {
                 .map((item, index) => (
                   <div key={index} className="accordion__item__wrapper">
                     <a
+                      href=""
                       data-tooltip-id={`my-tooltip-inline${index}`}
                       data-tooltip-content={`${item[1].name}`}
                     >
