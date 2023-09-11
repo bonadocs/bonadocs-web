@@ -4,7 +4,6 @@ import { useEthersSigner } from "../../ethers";
 import { validate, validateParams } from "../../utils/validate";
 import { toast } from "react-toastify";
 import { TextInput } from "../Input/TextInput";
-import { Collection } from "@bonadocs/core";
 import plusBlue from "../../image/plus-blue.svg";
 import close from "../../image/close.svg";
 import docsClose from "../../image/document-close.svg";
@@ -428,7 +427,7 @@ export const MethodParam = () => {
   useEffect(() => {
     if (getCurrentMethod) {
       getParams();
-
+      setPayable("")
       setCurrentResult([]);
       setShowResult(false);
     }
@@ -478,7 +477,7 @@ export const MethodParam = () => {
 
       {getCurrentMethod[1].payable && (
         <div className="">
-          <h3 className="method__parameters__title">Overrides</h3>
+          <h3 className="method__parameters__title lead">Overrides</h3>
           <h3 className="method__parameters__name">
             Value
             <input

@@ -14,6 +14,10 @@ export const projectStore = persist(
           address,
           chainId
         );
+
+        if (responseAbi == null) {
+          toast("dge")
+        }
         
       } catch (error) {
        
