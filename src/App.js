@@ -87,7 +87,6 @@ function App() {
     const data = window.localStorage.getItem("current");
     if (data !== null) {
       setCurrentMethod(JSON.parse(data));
-      console.log(JSON.parse(data));
     }
   }
   return (
