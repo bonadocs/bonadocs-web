@@ -201,7 +201,7 @@ export const AddContract = ({
         {!loading ? (
           <>
             {newProject
-              ? `Initiate Project${loading}`
+              ? `Initiate Project`
               : `Add Contract`}
           </>
         ) : (
