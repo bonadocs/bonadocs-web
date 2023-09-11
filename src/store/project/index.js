@@ -15,7 +15,7 @@ export const projectStore = persist(
           chainId
         );
         if (responseAbi == null) {
-          toast("Cannot retrieve verified contract. Try adding your ABI");
+          // toast("Cannot retrieve verified contract. Try adding your ABI");
         }
       } catch (error) {
         console.log(error);
@@ -38,10 +38,10 @@ export const projectStore = persist(
       abi,
       verified
     ) => {
+      const contractAbi =
+        verified !== true ? abi : await get().readContract(address, chainId);
       try {
         const project = new Collection(projectName, description);
-        const contractAbi =
-          verified !== true ? abi : await get().readContract(address, chainId);
         console.log(
           verified,
           contractName,
@@ -71,7 +71,13 @@ export const projectStore = persist(
         console.log(Collection.fromData(project.getSnapshot()));
         history.navigate("/editor/method");
       } catch (err) {
-        toast(`${err}`);
+        toast(
+          `${
+            contractAbi === undefined
+              ? "Cannot retrieve verified contract. Try adding your ABI manually."
+              : err
+          }`
+        );
       }
     },
   }),
