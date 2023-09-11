@@ -32,7 +32,7 @@ export const MethodList = ({ className }) => {
     console.log(Array.from(collection.displayData));
     setContracts(groupByContract(Array.from(collection.displayData)));
     console.log(groupByContract(Array.from(collection.displayData)));
-  }, [Array.from(collection.displayData).length]);
+  }, [latestContract]);
   return (
     <div className={className}>
       <div className="method__list__container">
