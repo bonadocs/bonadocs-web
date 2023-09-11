@@ -33,15 +33,17 @@ export const AccordionContent = ({ methods, read }) => {
                   return item[1].constant && item[1].type !== "event";
                 })
                 .map((item, index) => (
-                  <div className="accordion__item__wrapper">
+                  <div key={index} className="accordion__item__wrapper">
                     <a
                       data-tooltip-id={`my-tooltip-inline${index}`}
                       data-tooltip-content={`${item[1].name}`}
                     >
                       <h3
                         ref={ref}
-                        onClick={() => setCurrentMethod(item)}
-                        key={item[0]}
+                        onClick={() => {
+                          setCurrentMethod(item);
+                         
+                        }}
                         className={clsx(
                           active(item[1].name) && "accordion__item__active",
                           "accordion__item"
@@ -50,7 +52,7 @@ export const AccordionContent = ({ methods, read }) => {
                         {item[1].name}
                       </h3>
                     </a>
-                    {item[1].name.length > 20 && (
+                    {item[1].name.length >= 18 && (
                       <Tooltip
                         id={`my-tooltip-inline${index}`}
                         style={{
@@ -71,15 +73,18 @@ export const AccordionContent = ({ methods, read }) => {
                   return !item[1].constant && item[1].type !== "event";
                 })
                 .map((item, index) => (
-                  <div className="accordion__item__wrapper">
+                  <div key={index} className="accordion__item__wrapper">
                     <a
                       data-tooltip-id={`my-tooltip-inline${index}`}
                       data-tooltip-content={`${item[1].name}`}
                     >
                       <h3
                         ref={ref}
-                        onClick={() => setCurrentMethod(item)}
-                        key={item[0]}
+                        onClick={() => {
+                          setCurrentMethod(item);
+                         
+                        }}
+                        key={index}
                         className={clsx(
                           active(item[1].name) && "accordion__item__active",
                           "accordion__item"
@@ -88,7 +93,7 @@ export const AccordionContent = ({ methods, read }) => {
                         {item[1].name}
                       </h3>
                     </a>
-                    {item[1].name.length > 20 && (
+                    {item[1].name.length >= 18 && (
                       <Tooltip
                         id={`my-tooltip-inline${index}`}
                         style={{

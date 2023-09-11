@@ -3,38 +3,63 @@ import { useBonadocsStore } from "../../store";
 export const TextInput = ({
   collection,
   contractName,
+  docKey,
   dataKey,
   name,
   baseType,
   path,
-  className
+  className,
+  docs = false,
 }) => {
   const [, setText] = useState("");
-  const value = collection.getValue(contractName, dataKey, path);
+  const value = collection.getString(dataKey, path);
+  const docValue = collection.getString(docKey, path);
   const updateProject = useBonadocsStore((state) => state.updateProject);
   if (value == null) {
-    collection.updateValue(contractName, {
+    collection.updateString({
       key: dataKey,
       subPath: path,
       value: "",
     });
+    console.log(collection);
     updateProject(collection);
   }
 
   return (
-    <input
-      placeholder={name ? name : baseType}
-      value={value || ""}
-      className={className}
-      onChange={(event) => {
-        collection.updateValue(contractName, {
-          key: dataKey,
-          subPath: path,
-          value: event.target.value,
-        });
-        updateProject(collection);
-        setText(event.target.value);
-      }}
-    />
+    <>
+      <input
+        placeholder={
+          name ? `${name} ${docs && "docs"}` : `${baseType} ${docs && "docs"}`
+        }
+        value={value || ""}
+        className={className}
+        onChange={(event) => {
+          collection.updateString({
+            key: dataKey,
+            subPath: path,
+            value: event.target.value,
+          });
+          console.log(collection);
+          updateProject(collection);
+          setText(event.target.value);
+        }}
+      />
+      {/* 
+      <input
+        placeholder={name ? `${name} documentation` : baseType}
+        value={docValue || ""}
+        className={className}
+        onChange={(event) => {
+          collection.updateString({
+            key: docKey,
+            subPath: path,
+            value: event.target.value,
+          });
+          console.log(collection);
+          updateProject(collection);
+          setText(event.target.value);
+        }}
+      /> */}
+    </>
   );
 };

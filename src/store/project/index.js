@@ -9,7 +9,7 @@ export const projectStore = persist(
     readContract: async (address, chainId) => {
       try {
         const responseAbi = await loadContractSpec(
-          "http://localhost:8080",
+          process.env.REACT_APP__LOAD,
           address,
           chainId
         );
@@ -24,7 +24,7 @@ export const projectStore = persist(
     },
     updateProject: async (collection) => {
       set({
-        collection
+        collection,
       });
     },
     initiateProject: async (
@@ -49,7 +49,7 @@ export const projectStore = persist(
           jsonRpcUrl,
           contractAbi
         );
-        
+
         console.log(project);
         project.addContract({
           name: contractName,
@@ -57,8 +57,8 @@ export const projectStore = persist(
           chainCode: chainId,
           jsonRpcUrl,
           spec: contractAbi,
-          docs: {},
-          inputData: {}
+          docs: description,
+          inputData: {},
         });
 
         console.log(project);
@@ -68,7 +68,7 @@ export const projectStore = persist(
           collection: project,
         });
         console.log(Collection.fromData(project.getSnapshot()));
-        history.navigate("/editor");
+        history.navigate("/editor/method");
       } catch (err) {
         toast(`Confirm your ${err}`);
       }
@@ -82,14 +82,17 @@ export const projectStore = persist(
           throw new Error();
         }
         console.log("CHEAP OPERATION");
+        console.log(newValue.state.collection);
+
         const snapshot = newValue.state.collection.getSnapshot();
+        console.log();
         localStorage.setItem(name, JSON.stringify(snapshot));
       },
-      getItem: (name) => {
+      getItem: async (name) => {
         if (name !== "collection") {
           throw new Error();
         }
-        console.log('EXPENSIVE OPERATION');
+        console.log("EXPENSIVE OPERATION");
         const str = localStorage.getItem(name);
         if (!str) {
           return null;
@@ -97,7 +100,7 @@ export const projectStore = persist(
 
         const collection = Collection.fromData(JSON.parse(str));
         console.log(collection.displayData);
-        console.log(collection);
+
         return {
           state: {
             collection,

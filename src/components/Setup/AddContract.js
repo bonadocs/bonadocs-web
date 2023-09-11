@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { chains } from "../../data/chains";
 import { useBonadocsStore } from "../../store/index";
 import { validate } from "../../utils/validate";
 import "react-toastify/dist/ReactToastify.css";
+import { Bars } from "react-loading-icons";
 
 export const AddContract = ({
   projectName,
@@ -19,10 +20,13 @@ export const AddContract = ({
     network: chains[0][0],
     abi: "",
   });
+  const setCurrentMethod = useBonadocsStore((state) => state.setCurrentMethod);
   const initiateProject = useBonadocsStore((state) => state.initiateProject);
   const addContract = useBonadocsStore((state) => state.addContract);
-
+  const loadingRef = useRef()
   const submitProject = async () => {
+     loadingRef.current = true
+          console.log(loadingRef.current);
     let jsonRpcUrl, projectValidated;
     chains.map(([key, value]) => {
       if (key === project.network) {
@@ -38,6 +42,7 @@ export const AddContract = ({
           : validate({ ...requiredProject, projectName });
       console.log(projectValidated);
       console.log("project");
+      !projectValidated && ( loadingRef.current = false )
       projectValidated &&
         initiateProject(
           projectName,
@@ -49,6 +54,8 @@ export const AddContract = ({
           project.abi,
           checked
         );
+      setCurrentMethod(null)
+       loadingRef.current = false; 
     } else {
       projectValidated =
         checked !== true
@@ -56,6 +63,7 @@ export const AddContract = ({
           : validate({ ...requiredProject });
       console.log(projectValidated);
       console.log("contract");
+      !projectValidated && (loadingRef.current = false);
       if (projectValidated) {
         const close = await addContract(
           project.contractName,
@@ -63,16 +71,17 @@ export const AddContract = ({
           project.contractAddress,
           project.network,
           project.abi,
-          checked
+          checked,
+          project.description
         );
         console.log(close);
         close && closeModal();
+        loadingRef.current = false;
       }
     }
 
     // navigate("/editor");
   };
-
   return (
     <>
       <div className="contract__page__info__section">
@@ -120,7 +129,7 @@ export const AddContract = ({
           className="contract__page__info__input__select"
           id="networks"
         >
-          <option value="" disabled selected>
+          <option value="" selected disabled>
             Select your network
           </option>
           {chains.map(([key, value]) => (
@@ -131,8 +140,8 @@ export const AddContract = ({
         </select>
       </div>
       <h3>Is this contract verified?</h3>
-      <tr className="contract__page__info__text">
-        <td>
+      <div className="contract__page__info__text">
+        <div>
           <input
             value="true"
             onChange={() => setChecked(true)}
@@ -141,7 +150,10 @@ export const AddContract = ({
             type="radio"
             name="verification"
           />
-          <span onClick={() => setChecked(true)} class="graphical-radio"></span>
+          <span
+            onClick={() => setChecked(true)}
+            className="graphical-radio"
+          ></span>
           <span>Yes, it's verified</span>
           <input
             onChange={() => setChecked(false)}
@@ -152,12 +164,12 @@ export const AddContract = ({
             name="verification"
           />
           <span
-            class="graphical-radio"
+            className="graphical-radio"
             onClick={() => setChecked(false)}
           ></span>
           <span>No, it's not</span>
-        </td>
-      </tr>
+        </div>
+      </div>
       <p className="contract__page__info__text">
         If unverified, select "No" and you get to input your ABI manually.
       </p>
@@ -177,11 +189,18 @@ export const AddContract = ({
 
       <button
         onClick={() => {
+          loadingRef.current = true
+          console.log(loadingRef.current);
           submitProject();
         }}
+        disabled={loadingRef.current}
         className="contract__page__info__button"
       >
-        {newProject ? `Initiate Project` : `Add Contract`}
+        {!loadingRef.current ? (
+          <Bars className="loader__bars" />
+        ) : (
+          <>{newProject ? `Initiate Project` : `Add Contract`}</>
+        )}
       </button>
 
       {/* {!newProject && (

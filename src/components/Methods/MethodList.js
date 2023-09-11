@@ -1,6 +1,6 @@
 import { Accordion, AccordionItem as Item } from "@szhsin/react-accordion";
 import chevronDown from "../../image/chevron-down.svg";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { AccordionContent } from "../Accordion/AccordionContent";
 import { Collection } from "@bonadocs/core";
 import { useBonadocsStore } from "../../store";
@@ -11,6 +11,10 @@ import { MethodItem2 } from "./MethodItem2";
 import { useNavigate } from "react-router";
 import edit from "../../image/edit.svg";
 import trash from "../../image/trash.svg";
+import Modal from "react-modal";
+import close from "../../image/close.svg";
+import { toast } from "react-toastify";
+import { MethodListItem } from "./MethodListItem";
 
 export const MethodList = ({ className }) => {
   const [read, setRead] = useState(true);
@@ -18,20 +22,22 @@ export const MethodList = ({ className }) => {
   const collection = useBonadocsStore((state) => state.collection);
   const latestContract = useBonadocsStore((state) => state.latestContract);
   const getCurrentMethod = useBonadocsStore((state) => state.currentMethod);
+  const [contractDescription, setContractDescription] = useState("");
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     if (!collection) {
       return;
     }
-    console.log(collection.displayData.size);
+    console.log(Array.from(collection.displayData));
     setContracts(groupByContract(Array.from(collection.displayData)));
-  }, [latestContract]);
+    console.log(groupByContract(Array.from(collection.displayData)));
+  }, [Array.from(collection.displayData).length]);
   return (
     <div className={className}>
       <div className="method__list__container">
         <h3 className="method__list__container__name">
-          {collection._data.name} (Project name)
+          {collection.data.name}
         </h3>
 
         <div className="method__list__container__contracts">
@@ -62,16 +68,22 @@ export const MethodList = ({ className }) => {
                 <h4>Write</h4>
               </div>
             </div>
-            {Object.keys(contracts).length > 0 && (
+             
+            {Object.keys(groupByContract(Array.from(collection.displayData)))
+              .length > 0 && (
               <Accordion>
-                {Object.keys(contracts).map((key) => (
-                  //<option value={key}>{key}</option>
-                  <AccordionItem key={key} header={key}>
-                    <AccordionContent read={read} methods={contracts[key]} />
-                  </AccordionItem>
+                {Object.keys(contracts).map((key, index) => (
+                  <MethodListItem
+                    index={index}
+                    key={key}
+                    header={key}
+                    read={read}
+                    methods={contracts[key]}
+                  />
                 ))}
               </Accordion>
             )}
+           
           </div>
           {getCurrentMethod && <MethodItem2 />}
         </div>
@@ -79,21 +91,3 @@ export const MethodList = ({ className }) => {
     </div>
   );
 };
-
-const AccordionItem = ({ header, ...rest }) => (
-  <Item
-    {...rest}
-    header={
-      <div className="accordion__container">
-        <img className="chevron-down" src={chevronDown} alt="Chevron Down" />
-        <h4 className="accordion__container__header">{header}</h4>
-        <h4 className="accordion__container__edit">
-          <img src={edit} />
-        </h4>
-        <h4 className="accordion__container__delete">
-          <img src={trash} />
-        </h4>
-      </div>
-    }
-  />
-);

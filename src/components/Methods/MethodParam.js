@@ -4,7 +4,12 @@ import { useEthersSigner } from "../../ethers";
 import { validate, validateParams } from "../../utils/validate";
 import { toast } from "react-toastify";
 import { TextInput } from "../Input/TextInput";
-
+import { Collection } from "@bonadocs/core";
+import plusBlue from "../../image/plus-blue.svg";
+import close from "../../image/close.svg";
+import docsClose from "../../image/document-close.svg";
+import docsOpen from "../../image/document-open.svg";
+import clsx from "clsx";
 export const MethodParam = () => {
   const getCurrentMethod = useBonadocsStore((state) => state.currentMethod);
   const showResult = useBonadocsStore((state) => state.showResult);
@@ -24,7 +29,7 @@ export const MethodParam = () => {
       paramSegment(
         collection,
         getCurrentMethod[1].contract,
-        getCurrentMethod[1].dataKey,
+        getCurrentMethod[1].inputDataKey,
         param,
         values
       );
@@ -53,12 +58,14 @@ export const MethodParam = () => {
   };
 
   const handleInputChange = (path, index, event, type = "") => {
-    collection.updateValue(getCurrentMethod[1].contract, {
-      key: getCurrentMethod[1].dataKey,
+    collection.updateString({
+      key: getCurrentMethod[1].inputDataKey,
       subPath: path,
       value: str2bool(event.target.value),
     });
+
     updateProject(collection);
+
     //setResult(result);
     //console.log(result);
   };
@@ -108,15 +115,13 @@ export const MethodParam = () => {
       return;
     }
     if (param.arrayChildren) {
-      let generatedCount = Number(
-        collection.getValue(contractName, dataKey, paramPath)
-      );
+      let generatedCount = Number(collection.getString(dataKey, paramPath));
       if (isNaN(generatedCount) || generatedCount < 1) {
         generatedCount = 1;
       }
       generatedCount =
         param.arrayLength === -1 ? generatedCount : param.arrayLength;
-      collection.updateValue(contractName, {
+      collection.updateString({
         key: dataKey,
         subPath: paramPath,
         value: generatedCount.toString(),
@@ -199,9 +204,8 @@ export const MethodParam = () => {
     var isFirst = true;
     for (let i = 0; i < result.length; i++) {
       const item = result[i];
-      const data = collection.getValue(
-        getCurrentMethod[1].contract,
-        getCurrentMethod[1].dataKey,
+      const data = collection.getString(
+        getCurrentMethod[1].inputDataKey,
         item.path
       );
       if (isFirst) {
@@ -261,7 +265,7 @@ export const MethodParam = () => {
     try {
       console.log(result);
       if (validateParams(validateResult()) !== true) return;
-      console.log(getCurrentMethod[1]);
+      console.log(getCurrentMethod);
       const method = getCurrentMethod[1];
       const signature = method.fullSignature;
 
@@ -276,7 +280,7 @@ export const MethodParam = () => {
         if (validate({ payable }) !== true) return;
         res = await collection.runFunction(
           {
-            contractName: method.contract,
+            contractId: method.contract,
             data,
             overrides: { value: payable },
           },
@@ -287,15 +291,16 @@ export const MethodParam = () => {
         setCurrentResult(res);
         setShowResult(true);
       } else {
-        console.log({ contractName: method.contract, data });
+        console.log({ contractName: method, data });
         res = await collection.runFunction(
           {
-            contractName: method.contract,
+            contractId: method.contract,
             data,
           },
           { jsonResult: true }
         );
 
+        console.log(res);
         setCurrentResult(res);
         setShowResult(true);
       }
@@ -331,15 +336,16 @@ export const MethodParam = () => {
     if (!arrayInputParam) {
       throw new Error("Invalid array selection");
     }
-    let generatedCount =
-      countToAdd +
-      Number(
-        collection.getValue(contractName, functionDataKey, arrayDefinition.path)
-      );
+    const prevGeneratedCount = Number(
+      collection.getString(functionDataKey, arrayDefinition.path)
+    );
+
+    let generatedCount = countToAdd + prevGeneratedCount;
+
     if (generatedCount < 1) {
       generatedCount = 1;
     }
-    collection.updateValue(contractName, {
+    collection.updateString({
       key: functionDataKey,
       subPath: arrayDefinition.path,
       value: generatedCount.toString(),
@@ -356,9 +362,13 @@ export const MethodParam = () => {
     );
     const elementsPerItem =
       (elementDisplaySegments.length - 1) / generatedCount;
+    for (let i = 0; i < elementDisplaySegments.length; i++) {
+      elementDisplaySegments[i].index += arrayDefinitionIndex;
+      elementDisplaySegments[i].arrayIndex = arrayDefinitionIndex;
+    }
     paramSegments.splice(
       arrayDefinitionIndex,
-      1 + elementsPerItem * generatedCount,
+      1 + elementsPerItem * prevGeneratedCount,
       ...elementDisplaySegments
     );
   }
@@ -387,8 +397,10 @@ export const MethodParam = () => {
     functionDataKey,
     paramSegments,
     arrayDefinitionIndex,
-    indexToDelete
+    indexToDelete,
+    docKey
   ) {
+    console.log("id", contractName);
     const arrayDefinition = paramSegments[arrayDefinitionIndex];
     if (!arrayDefinition) {
       throw new Error("Invalid selection for add element");
@@ -408,23 +420,35 @@ export const MethodParam = () => {
     }
 
     const generatedCount = Number(
-      collection.getValue(contractName, functionDataKey, arrayDefinition.path)
+      collection.getString(functionDataKey, arrayDefinition.path)
     );
+    console.log("generatedcount", generatedCount);
     for (let i = indexToDelete; i < generatedCount; i++) {
       if (i === generatedCount - 1) {
         collection.deleteEntireSubPath(
-          contractName,
           functionDataKey,
+          arrayDefinition.path + "." + i
+        );
+
+        collection.deleteEntireSubPath(
+          docKey,
           arrayDefinition.path + "." + i
         );
       } else {
         collection.replaceEntireSubPath(
-          contractName,
           functionDataKey,
           arrayDefinition.path + "." + (i + 1),
           arrayDefinition.path + "." + i,
           false
         );
+
+        collection.replaceEntireSubPath(
+          docKey,
+          arrayDefinition.path + "." + (i + 1),
+          arrayDefinition.path + "." + i,
+          false
+        );
+
       }
     }
     modifyArrayElements(
@@ -453,7 +477,7 @@ export const MethodParam = () => {
     <div className="method__parameters">
       {result.length !== 0 && (
         <>
-          <h3 className="method__parameters__title">Params</h3>
+          <h3 className="method__parameters__title lead">Params</h3>
           <div>
             {result.map(
               (
@@ -469,68 +493,23 @@ export const MethodParam = () => {
                 },
                 i
               ) => (
-                <h3
+                <ParamsList
+                  addArrayItem={addArrayItem}
+                  result={result}
+                  collection={collection}
+                  method={getCurrentMethod[1]}
                   key={i}
-                  className="method__parameters__name"
-                  style={{ marginLeft: `${indent * 1.4}rem` }}
-                >
-                  {name} ({baseType})
-                  {baseType !== "tuple" &&
-                    baseType !== "array" &&
-                    baseType !== "bool" && (
-                      <TextInput
-                        contractName={getCurrentMethod[1].contract}
-                        dataKey={getCurrentMethod[1].dataKey}
-                        className="method__parameters__input"
-                        path={path}
-                        name={name}
-                        baseType={baseType}
-                        collection={collection}
-                      />
-                    )}
-                  {baseType === "bool" && (
-                    <select
-                      className="method__parameters__select"
-                      onChange={(event) =>
-                        handleInputChange(path, index, event, baseType)
-                      }
-                    >
-                      <option value={true}>True</option>
-                      <option value={false}>False</option>
-                    </select>
-                  )}
-                  {baseType === "array" && (
-                    <button
-                      onClick={() =>
-                        addArrayItem(
-                          collection,
-                          getCurrentMethod[1].contract,
-                          getCurrentMethod[1].dataKey,
-                          result,
-                          index
-                        )
-                      }
-                    >
-                      Add array property
-                    </button>
-                  )}
-                  {arrayPath && (
-                    <button
-                      onClick={() => {
-                        deleteAtSpecificIndex(
-                          collection,
-                          getCurrentMethod[1].contract,
-                          getCurrentMethod[1].dataKey,
-                          result,
-                          arrayIndex,
-                          indexInArray
-                        );
-                      }}
-                    >
-                      Remove Item
-                    </button>
-                  )}
-                </h3>
+                  name={name}
+                  index={index}
+                  baseType={baseType}
+                  indent={indent}
+                  arrayIndex={arrayIndex}
+                  arrayPath={arrayPath}
+                  path={path}
+                  indexInArray={indexInArray}
+                  handleInputChange={handleInputChange}
+                  deleteAtSpecificIndex={deleteAtSpecificIndex}
+                />
               )
             )}
           </div>
@@ -551,9 +530,135 @@ export const MethodParam = () => {
           </h3>
         </div>
       )}
-      <button className="method__item__button" onClick={() => queryMethod()}>
-        Query {getCurrentMethod[1].name}
+      <div className="method__item__query">
+        <button className="method__item__button" onClick={() => queryMethod()}>
+          Query {getCurrentMethod[1].name}
+        </button>
+      </div>
+
+      {/* <button onClick={async () => console.log(await collection.save())}>
+        save
       </button>
+      <button
+        onClick={async () => {
+
+          console.log(
+            await Collection.fromIpfs(
+              "ipfs://bafkreiaxcv4mzwjj2u4ykze4iy6j6mogbqkptqap5ksnxxcc5o5ioxausa"
+            )
+          );
+        }}
+      >
+        retreive
+      </button> */}
+    </div>
+  );
+};
+
+export const ParamsList = ({
+  name,
+  index,
+  baseType,
+  indent,
+  arrayIndex,
+  arrayPath,
+  path,
+  indexInArray,
+  i,
+  method,
+  collection,
+  result,
+  addArrayItem,
+  handleInputChange,
+  deleteAtSpecificIndex,
+}) => {
+  const [showDocs, setShowDocs] = useState(true);
+  return (
+    <div
+      className={clsx(
+        indent === 0 && "method__parameters__item",
+        i === 0 && "bt-0"
+      )}
+      style={{ marginLeft: `${indent * 1.4}rem` }}
+    >
+      <h3 key={i} className={clsx("method__parameters__name")}>
+        {!showDocs ? (
+          <img  onClick={() => setShowDocs(!showDocs)} src={docsClose} />
+        ) : (
+          <img onClick={() => setShowDocs(!showDocs)} src={docsOpen} />
+        )}
+        {name} ({baseType})
+        {baseType !== "tuple" &&
+          baseType !== "array" &&
+          baseType !== "bool" && (
+            <TextInput
+              dataKey={method.inputDataKey}
+              className="method__parameters__input"
+              path={path}
+              name={name}
+              baseType={baseType}
+              collection={collection}
+            />
+          )}
+        {baseType === "bool" && (
+          <select
+            className="method__parameters__select"
+            onChange={(event) =>
+              handleInputChange(path, index, event, baseType)
+            }
+          >
+            <option value={true}>True</option>
+            <option value={false}>False</option>
+          </select>
+        )}
+        {baseType === "array" && (
+          <button
+            className="method__parameters__button"
+            onClick={() =>
+              addArrayItem(
+                collection,
+                method.contract,
+                method.inputDataKey,
+                result,
+                index
+              )
+            }
+          >
+            <img src={plusBlue} />
+            Add array property
+          </button>
+        )}
+        {arrayPath && (
+          <button
+            className="method__parameters__button__remove"
+            onClick={() => {
+              deleteAtSpecificIndex(
+                collection,
+                method.contract,
+                method.inputDataKey,
+                result,
+                arrayIndex,
+                indexInArray,
+                method.docKey
+              );
+            }}
+          >
+            <img src={close} />
+          </button>
+        )}
+      </h3>
+
+      {
+       showDocs && <TextInput
+        dataKey={method.docKey}
+        className="method__parameters__input__docs"
+        path={path}
+        name={name}
+        baseType={baseType}
+        collection={collection}
+        docs={true}
+      />
+     } 
     </div>
   );
 };

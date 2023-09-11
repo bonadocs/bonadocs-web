@@ -2,8 +2,10 @@ import { SidebarButton } from "../Sidebar/SidebarButton";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 export const ActionHeader = () => {
+
   return (
     <div className="contract__utils">
+      
       <SidebarButton />
 
       <ConnectButton.Custom>

@@ -7,30 +7,38 @@ import { useBonadocsStore } from "../store";
 
 export default function LiveMarkdown() {
   const [markdownInput, setMarkdownInput] = useState();
-  const [dataKey, setDataKey] = useState("");
+  const [docKey, setDocKey] = useState("");
   const [preview, setPreview] = useState(false);
   const getCurrentMethod = useBonadocsStore((state) => state.currentMethod);
   const collection = useBonadocsStore((state) => state.collection);
+  const updateProject = useBonadocsStore((state) => state.updateProject);
   const updateDocs = (e) => {
     setMarkdownInput(e.target.value);
-    // console.log(dataKey);
-    // collection.updateDoc({
-    //   key: dataKey,
-    //   docText: e.target.value,
-    // });
-    //console.log(Collection.displayData);
+
+    collection.updateString({
+      key: getCurrentMethod[1].docKey,
+      value: e.target.value,
+    });
+    updateProject(collection);
   };
 
   useEffect(() => {
-    setDataKey(getCurrentMethod[1].dataKey);
-  }, []);
+    console.log(collection);
+    const docValue = collection.getString(
+      getCurrentMethod[1].docKey,
+      getCurrentMethod[1].path
+    );
+    console.log(docValue);
+    if (docValue) {
+      setMarkdownInput(docValue);
+    } else setMarkdownInput(getCurrentMethod[1].fullSignature);
+  }, [getCurrentMethod]);
 
   return (
     <>
       <button
         className={clsx(
-          !preview ? "markdown__heading__active":
-          "markdown__heading__md"
+          !preview ? "markdown__heading__active" : "markdown__heading__md"
         )}
         onClick={() => setPreview(false)}
       >
@@ -38,8 +46,7 @@ export default function LiveMarkdown() {
       </button>
       <button
         className={clsx(
-          preview ? "markdown__heading__active":
-          "markdown__heading__preview"
+          preview ? "markdown__heading__active" : "markdown__heading__preview"
         )}
         onClick={() => setPreview(true)}
       >

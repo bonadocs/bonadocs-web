@@ -28,6 +28,7 @@ $sidebar-text: #64748b;
 $dermacate: #e2e8f0;
 $tooltip-bg: #f1f5f9;
 $table-header: #eef2f5;
+$warning-red: #FEE5ED;
 
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro&display=swap");
@@ -132,7 +133,6 @@ video {
   font-family: "Sora", sans-serif;
   font-size: 1.4rem;
   font-style: normal;
-  font-weight: 400;
   line-height: 2rem;
   // color: $font-colour;
   //   outline: 2px solid red;
@@ -251,4 +251,37 @@ table {
 
 .z-10 {
   z-index: 10;
+}
+
+.bt-1 {
+  border-top: 1px solid $dermacate;
+}
+
+.mt-5 {
+  margin-top: 40%;
+}
+
+.loader {
+  &__bars {
+    height: 1.5rem;
+    align-self: center;
+  }
+}
+
+.description {
+  &__height {
+    height: 30rem;
+  }
+}
+
+.lead {
+  margin: 1.6rem 0 0 1.6rem;
+}
+
+.bt-0 {
+  border: none !important;
+}
+
+.ml-auto {
+  margin-left: auto;
 }

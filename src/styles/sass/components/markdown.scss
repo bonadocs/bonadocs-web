@@ -25,6 +25,8 @@
     display: flex;
     width: 100%;
     padding: 1.6rem;
+    line-height: 3rem;
+    font-size: large;
     background-color: $active-link;
     &__editor {
       height: 27.2rem;

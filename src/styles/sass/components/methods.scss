@@ -1,5 +1,5 @@
 .method {
-  width: 70%;
+  width: 100%;
   &__result {
     display: flex;
     height: 5rem;
@@ -22,7 +22,6 @@
     }
   }
   &__parameters {
-    margin: 1.6rem 0 0 1.6rem;
     height: calc(100vh - 47rem);
     margin-bottom: 4rem;
     overflow: auto;
@@ -31,32 +30,74 @@
       font-weight: 600;
     }
     &__input {
-      background-color: $active-link;
+      background-color: #E2E8F0;
       margin-left: 2.4rem;
       padding: 0.4rem 0.8rem;
       border-radius: 0.4rem;
-      width: 100%;
+      width: 90%;
+      &__docs {
+        border:1px solid #E2E8F0;
+      margin-left: 2.4rem;
+      width: 90%;
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.4rem;
+      }
     }
     &__select {
-      padding: 1.6rem;
+      height: 3.4rem;
+      margin-left: auto;
+      width: 40%;
+      padding: 0 0.4rem;
       font-size: 1.4rem;
       background-color: $input-color;
       color: $input-text;
-      background-image: url("../../image/dropdown.svg");
+      background-image: url("../../image/stepper.svg");
       background-repeat: no-repeat;
-      background-position-x: 97%;
+      background-size: 20% 70%;
+      background-position-x: 100%;
       background-position-y: 50%;
+
       &__title {
         font-weight: 600;
       }
     }
     &__name {
       color: $text-color;
+      align-items: center;
       padding: 0.6rem 0;
       width: 90%;
       margin: 0 auto;
       display: flex;
+      font-weight: 400;
       white-space: nowrap;
+      img {
+        margin-right: .3rem;
+      }
+    }
+    &__item {
+      border-top: 1px solid $dermacate;
+      padding-left: 1.6rem;
+      margin: 1.5rem 0;
+      display: grid;
+      align-items: center;
+    }
+
+    &__button {
+      margin-left: auto;
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      img {
+        margin-right: 0.5rem;
+      }
+      &__remove {
+        background-color: $warning-red;
+        display: flex;
+        align-items: center;
+        border-radius: 4px;
+        padding: 0.5rem;
+        margin-left: auto;
+      }
     }
   }
   &__title {
@@ -67,6 +108,10 @@
     color: $heading-color;
     font-weight: 600;
     line-height: 2rem;
+    &__edit {
+      margin-left: auto;
+      cursor: pointer;
+    }
   }
   &__list {
     &__container {
@@ -143,6 +188,11 @@
     }
   }
   &__item {
+    &__query {
+      border-top: 1px solid $dermacate;
+      padding: 9.6rem 0 2rem 0;
+      margin-top: 2rem;
+    }
     &__button {
       display: flex;
       align-items: center;

@@ -1,6 +1,7 @@
 import "./styles/css/index.css";
 import { SetupScreen } from "./pages/SetupScreen";
 import { Editor } from "./pages/Editor";
+import { ProtectedRoute } from "./utils/ProtectedRoute";
 import Modal from "react-modal";
 import { MethodWrapper } from "./components/Methods/MethodWrapper";
 import {
@@ -12,6 +13,7 @@ import {
 } from "react-router-dom";
 import { history } from "./_helpers/history";
 import { ToastContainer } from "react-toastify";
+import { useEffect } from "react";
 import "@rainbow-me/rainbowkit/styles.css";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, sepolia, WagmiConfig } from "wagmi";
@@ -36,6 +38,7 @@ import {
   arbitrumGoerli,
 } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
+import { useBonadocsStore } from "./store";
 import { publicProvider } from "wagmi/providers/public";
 import { ActionWrapper } from "./components/Actions/ActionWrapper";
 import { Variable } from "./pages/Variable";
@@ -81,6 +84,24 @@ Modal.setAppElement("#root");
 function App() {
   history.navigate = useNavigate();
   history.location = useLocation();
+  const navigate = useNavigate();
+  const collection = useBonadocsStore((state) => state.collection);
+  const setCurrentMethod = useBonadocsStore((state) => state.setCurrentMethod);
+  const currentMethod = useBonadocsStore((state) => state.CurrentMethod);
+  useEffect(() => {
+    const data = window.localStorage.getItem("current");
+    if (data !== null) {
+      // const method = JSON.parse(data);
+      // const available = collection.data.contracts.find(
+      //   (item) => item.id === method[1].contract
+      // );
+      // available &&
+        
+        setCurrentMethod(JSON.parse(data));
+
+      console.log(currentMethod);
+    }
+  }, []);
   return (
     <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider chains={chains}>
@@ -88,10 +109,12 @@ function App() {
           <ToastContainer />
           <Routes>
             <Route path="/" element={<SetupScreen />} />
-            <Route path="/editor" element={<Editor />}>
-              <Route path="method" element={<MethodWrapper />} />
-              <Route path="action" element={<ActionWrapper />} />
-              <Route path="variable" element={<Variable />} />
+            <Route element={<ProtectedRoute />}>
+              <Route path="/editor" element={<Editor />}>
+                <Route path="method" element={<MethodWrapper />} />
+                <Route path="action" element={<ActionWrapper />} />
+                <Route path="variable" element={<Variable />} />
+              </Route>
             </Route>
           </Routes>
         </div>

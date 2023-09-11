@@ -99,7 +99,6 @@ video {
   font-family: "Sora", sans-serif;
   font-size: 1.4rem;
   font-style: normal;
-  font-weight: 400;
   line-height: 2rem;
 }
 
@@ -202,6 +201,35 @@ table {
 
 .z-10 {
   z-index: 10;
+}
+
+.bt-1 {
+  border-top: 1px solid #e2e8f0;
+}
+
+.mt-5 {
+  margin-top: 40%;
+}
+
+.loader__bars {
+  height: 1.5rem;
+  align-self: center;
+}
+
+.description__height {
+  height: 30rem;
+}
+
+.lead {
+  margin: 1.6rem 0 0 1.6rem;
+}
+
+.bt-0 {
+  border: none !important;
+}
+
+.ml-auto {
+  margin-left: auto;
 }
 
 .contract__page__navbar {
@@ -453,6 +481,12 @@ body {
   font-weight: 400;
   margin-right: auto;
 }
+.accordion__container__input {
+  outline: 1px solid #e2e8f0;
+  width: 80%;
+  color: #475569;
+  padding: 0.8rem;
+}
 .accordion__container .accordion__container__edit {
   display: none;
 }
@@ -485,6 +519,7 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  font-weight: 400;
 }
 .accordion__item__active {
   color: #100a37;
@@ -532,9 +567,14 @@ body {
 .variable__add {
   margin-left: auto;
   display: flex;
+  cursor: pointer;
+}
+.variable__table {
+  display: grid;
 }
 .variable__table__header {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   background-color: #eef2f5;
   padding: 1.6rem;
   gap: 2.4rem;
@@ -550,7 +590,8 @@ body {
   font-weight: 600;
 }
 .variable__table__item {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   border-bottom: 1px solid #e2e8f0;
   margin: 0 2.3rem 0 2.4rem;
   padding: 1.6rem;
@@ -560,6 +601,7 @@ body {
 .variable__table__item__indi {
   width: 24rem;
   color: #475569;
+  font-weight: 600;
 }
 .variable__table__item__input {
   outline: 1px solid #e2e8f0;
@@ -567,7 +609,30 @@ body {
   color: #475569;
   padding: 0.8rem;
 }
+.variable__table__item__image {
+  justify-self: center;
+  cursor: pointer;
+}
 
+.contract__description {
+  padding: 1.6rem 1.6rem 1.6rem 2.4rem;
+  height: 27.2rem;
+  overflow: auto;
+  font-size: 1.4rem;
+}
+.contract__description__button {
+  cursor: pointer;
+  width: 40%;
+  border: none;
+  background-color: #055df5;
+  color: white;
+  height: 5rem;
+  font-size: 1.3rem;
+  justify-self: end;
+  justify-self: end;
+  margin-bottom: 0.7rem;
+  margin-top: 0.4rem;
+}
 .contract__utils {
   display: flex;
   font-size: 2rem;
@@ -580,6 +645,7 @@ body {
 }
 .contract__utils__button {
   display: flex;
+  margin-left: 1.5rem;
   height: 4rem;
   align-items: center;
   padding: 0.8rem 1.6rem;
@@ -602,6 +668,30 @@ body {
   display: grid;
   grid-template-columns: [start] 10% [start2] 25% [line2] auto [line3] 35% [end];
   margin-top: 2rem;
+}
+.contract__page__header {
+  display: flex;
+  grid-column-start: line2;
+  grid-column-end: line3;
+  align-items: flex-start;
+  background-color: #f8fafc;
+  height: 6rem;
+  align-items: center;
+}
+.contract__page__header__item {
+  color: #475569;
+  font-weight: 600;
+  width: 50%;
+  margin: 0.8rem;
+  height: 3.8rem;
+  align-items: center;
+  display: grid;
+  justify-items: center;
+  cursor: pointer;
+}
+.contract__page__header__item__active {
+  background-color: #055df5;
+  color: white;
 }
 .contract__page__description {
   display: flex;
@@ -725,7 +815,7 @@ body {
 }
 
 .method {
-  width: 70%;
+  width: 100%;
 }
 .method__result {
   display: flex;
@@ -749,7 +839,6 @@ body {
   padding: 0.4rem 0.4rem 0.4rem 0.8rem;
 }
 .method__parameters {
-  margin: 1.6rem 0 0 1.6rem;
   height: calc(100vh - 47rem);
   margin-bottom: 4rem;
   overflow: auto;
@@ -758,20 +847,31 @@ body {
   font-weight: 600;
 }
 .method__parameters__input {
-  background-color: #f8fafc;
+  background-color: #E2E8F0;
   margin-left: 2.4rem;
   padding: 0.4rem 0.8rem;
   border-radius: 0.4rem;
-  width: 100%;
+  width: 90%;
+}
+.method__parameters__input__docs {
+  border: 1px solid #E2E8F0;
+  margin-left: 2.4rem;
+  width: 90%;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.4rem;
 }
 .method__parameters__select {
-  padding: 1.6rem;
+  height: 3.4rem;
+  margin-left: auto;
+  width: 40%;
+  padding: 0 0.4rem;
   font-size: 1.4rem;
   background-color: #f3f6f8;
   color: #475569;
-  background-image: url("../../image/dropdown.svg");
+  background-image: url("../../image/stepper.svg");
   background-repeat: no-repeat;
-  background-position-x: 97%;
+  background-size: 20% 70%;
+  background-position-x: 100%;
   background-position-y: 50%;
 }
 .method__parameters__select__title {
@@ -779,11 +879,40 @@ body {
 }
 .method__parameters__name {
   color: #475569;
+  align-items: center;
   padding: 0.6rem 0;
   width: 90%;
   margin: 0 auto;
   display: flex;
+  font-weight: 400;
   white-space: nowrap;
+}
+.method__parameters__name img {
+  margin-right: 0.3rem;
+}
+.method__parameters__item {
+  border-top: 1px solid #e2e8f0;
+  padding-left: 1.6rem;
+  margin: 1.5rem 0;
+  display: grid;
+  align-items: center;
+}
+.method__parameters__button {
+  margin-left: auto;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+}
+.method__parameters__button img {
+  margin-right: 0.5rem;
+}
+.method__parameters__button__remove {
+  background-color: #FEE5ED;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  padding: 0.5rem;
+  margin-left: auto;
 }
 .method__title {
   display: flex;
@@ -793,6 +922,10 @@ body {
   color: #100a37;
   font-weight: 600;
   line-height: 2rem;
+}
+.method__title__edit {
+  margin-left: auto;
+  cursor: pointer;
 }
 .method__list__container {
   justify-items: left;
@@ -862,6 +995,11 @@ body {
   border-bottom: 1px solid grey;
   font-size: 1.4rem;
   font-weight: 700;
+}
+.method__item__query {
+  border-top: 1px solid #e2e8f0;
+  padding: 9.6rem 0 2rem 0;
+  margin-top: 2rem;
 }
 .method__item__button {
   display: flex;
@@ -939,6 +1077,8 @@ body {
   display: flex;
   width: 100%;
   padding: 1.6rem;
+  line-height: 3rem;
+  font-size: large;
   background-color: #f8fafc;
 }
 .markdown__container__editor {
@@ -974,6 +1114,9 @@ body {
 }
 .modal__container::-webkit-scrollbar {
   display: none;
+}
+.modal__description {
+  margin-top: 1.3rem;
 }
 .modal__title {
   font-size: 1.6rem;

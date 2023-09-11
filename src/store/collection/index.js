@@ -8,16 +8,49 @@ export const collectionStore = (set, get) => ({
   latestContract: null,
   currentResult: null,
   showResult: false,
+  setLastestResult: (result) => set(() => ({ latestContract: result })),
   setCurrentResult: (result) => set(() => ({ currentResult: result })),
   setShowResult: (show) => set(() => ({ showResult: show })),
-  setCurrentMethod: (method) => set(() => ({ currentMethod: method })),
+  setCurrentMethod: (method) => {
+    set(() => ({ currentMethod: method }))
+    if (method == null) {
+      window.localStorage.removeItem("current");
+    }
+    window.localStorage.setItem("current", JSON.stringify(method));
+  },
+  setDeleteContract: (id) => {
+    try {
+      useBonadocsStore.getState().collection.removeContract(id);
+      useBonadocsStore
+        .getState()
+        .updateProject(useBonadocsStore.getState().collection);
+      
+      toast.success(`Contract deleted`);
+      set({
+        latestContract: "",
+      });
+      // const available = useBonadocsStore
+      //   .getState()
+      //   .collection.data.contracts.find(
+      //     (item) => item.id === get().currentMethod[1].contract
+      // );
+
+      if (id === get().currentMethod[1].contract) {
+        get().setCurrentMethod(null)
+      }
+        
+    } catch (err) {
+      toast(err);
+    }
+  },
   addContract: async (
     contractName,
     jsonRpcUrl,
     address,
     chainId,
     abi,
-    verified
+    verified,
+    docs
   ) => {
     try {
       const contractAbi =
@@ -32,7 +65,7 @@ export const collectionStore = (set, get) => ({
           chainCode: chainId,
           jsonRpcUrl: jsonRpcUrl,
           spec: contractAbi,
-          docs: {},
+          docs,
         });
         useBonadocsStore.getState().collection.addContract({
           name: contractName,
@@ -40,7 +73,7 @@ export const collectionStore = (set, get) => ({
           chainCode: chainId,
           jsonRpcUrl: jsonRpcUrl,
           spec: contractAbi,
-          docs: {},
+          docs,
           inputData: {},
         });
         useBonadocsStore
@@ -57,4 +90,3 @@ export const collectionStore = (set, get) => ({
     }
   },
 });
-

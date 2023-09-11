@@ -103,6 +103,7 @@ body {
       margin-top: 1rem;
       margin-left: 0.5rem;
       padding: 0.5rem;
+      
       cursor: pointer;
       &__active {
         background-color: black;
@@ -196,6 +197,12 @@ body {
       font-weight: 400;
       margin-right: auto;
     }
+    &__input {
+      outline: 1px solid $dermacate;
+      width: 80%;
+      color: $text-color;
+      padding: 0.8rem;
+    }
   }
   &__container &__container__edit {
     display: none;
@@ -235,7 +242,7 @@ body {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-
+    font-weight: 400;
     &__active {
       color: $heading-color;
       border-right: 3px solid $blue;
@@ -285,10 +292,13 @@ body {
   &__add {
     margin-left: auto;
     display: flex;
+    cursor: pointer;
   }
   &__table {
+    display: grid;
     &__header {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       background-color: $table-header;
       padding: 1.6rem;
       gap: 2.4rem;
@@ -304,7 +314,8 @@ body {
       }
     }
     &__item {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
       border-bottom: 1px solid $dermacate;
       margin: 0 2.3rem 0 2.4rem;
       padding: 1.6rem;
@@ -313,12 +324,17 @@ body {
       &__indi {
         width: 24rem;
         color: $text-color;
+        font-weight: 600;
       }
       &__input {
         outline: 1px solid $dermacate;
         width: 24rem;
         color: $text-color;
         padding: 0.8rem;
+      }
+      &__image {
+        justify-self: center;
+        cursor: pointer;
       }
     }
   }

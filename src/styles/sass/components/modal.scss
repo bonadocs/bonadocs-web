@@ -11,6 +11,9 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
+  &__description {
+    margin-top: 1.3rem;
+  }
   &__title {
     font-size: 1.6rem;
     font-weight: 600;

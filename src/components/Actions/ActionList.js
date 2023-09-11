@@ -24,6 +24,8 @@ export const ActionList = ({ className }) => {
     console.log(collection.displayData.size);
     setContracts(groupByContract(Array.from(collection.displayData)));
   }, [latestContract]);
+
+  
   return (
     <div className={className}>
       <div className="method__list__container">
