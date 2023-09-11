@@ -24,7 +24,7 @@ export const MethodList = ({ className }) => {
   const getCurrentMethod = useBonadocsStore((state) => state.currentMethod);
   const [contractDescription, setContractDescription] = useState("");
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     if (!collection) {
       return;
@@ -32,60 +32,68 @@ export const MethodList = ({ className }) => {
     setContracts(groupByContract(Array.from(collection.displayData)));
   }, [latestContract]);
   return (
-    <div className={className}>
-      <div className="method__list__container">
-        <h3 className="method__list__container__name">
-          {collection.data.name}
-        </h3>
+    <>
+      {collection && (
+        <div className={className}>
+          <div className="method__list__container">
+            <h3 className="method__list__container__name">
+              {collection.data.name}
+            </h3>
 
-        <div className="method__list__container__contracts">
-          <div className="method__list__container__contracts__select">
-            <div className="method__list__container__contracts__select__title">
-              <h3>All Contracts</h3>
-              <img alt="refresh" onClick={() => navigate(0)} src={refresh} />
-            </div>
-            <div className="method__list__container__contracts__section">
-              <div
-                className={clsx(
-                  read &&
-                    "method__list__container__contracts__section__option__active",
-                  "method__list__container__contracts__section__option"
-                )}
-                onClick={() => setRead(true)}
-              >
-                <h4>Read</h4>
-              </div>
-              <div
-                className={clsx(
-                  !read &&
-                    "method__list__container__contracts__section__option__active",
-                  "method__list__container__contracts__section__option"
-                )}
-                onClick={() => setRead(false)}
-              >
-                <h4>Write</h4>
-              </div>
-            </div>
-             
-            {Object.keys(groupByContract(Array.from(collection.displayData)))
-              .length > 0 && (
-              <Accordion>
-                {Object.keys(contracts).map((key, index) => (
-                  <MethodListItem
-                    index={index}
-                    key={key}
-                    header={key}
-                    read={read}
-                    methods={contracts[key]}
+            <div className="method__list__container__contracts">
+              <div className="method__list__container__contracts__select">
+                <div className="method__list__container__contracts__select__title">
+                  <h3>All Contracts</h3>
+                  <img
+                    alt="refresh"
+                    onClick={() => navigate(0)}
+                    src={refresh}
                   />
-                ))}
-              </Accordion>
-            )}
-           
+                </div>
+                <div className="method__list__container__contracts__section">
+                  <div
+                    className={clsx(
+                      read &&
+                        "method__list__container__contracts__section__option__active",
+                      "method__list__container__contracts__section__option"
+                    )}
+                    onClick={() => setRead(true)}
+                  >
+                    <h4>Read</h4>
+                  </div>
+                  <div
+                    className={clsx(
+                      !read &&
+                        "method__list__container__contracts__section__option__active",
+                      "method__list__container__contracts__section__option"
+                    )}
+                    onClick={() => setRead(false)}
+                  >
+                    <h4>Write</h4>
+                  </div>
+                </div>
+
+                {Object.keys(
+                  groupByContract(Array.from(collection.displayData))
+                ).length > 0 && (
+                  <Accordion>
+                    {Object.keys(contracts).map((key, index) => (
+                      <MethodListItem
+                        index={index}
+                        key={key}
+                        header={key}
+                        read={read}
+                        methods={contracts[key]}
+                      />
+                    ))}
+                  </Accordion>
+                )}
+              </div>
+              {getCurrentMethod && <MethodItem2 />}
+            </div>
           </div>
-          {getCurrentMethod && <MethodItem2 />}
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
