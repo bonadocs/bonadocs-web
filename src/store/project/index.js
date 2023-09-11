@@ -14,7 +14,7 @@ export const projectStore = persist(
           chainId
         );
         if (responseAbi == null) {
-          toast("Confirm your contract address and network");
+          toast("Cannot retrieve verified contract. Try adding your ABI");
         }
         return responseAbi;
       } catch (error) {
