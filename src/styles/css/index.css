@@ -232,6 +232,10 @@ table {
   margin-left: auto;
 }
 
+.ml-2 {
+  margin-left: 2rem;
+}
+
 .contract__page__navbar {
   grid-column-start: start2;
   grid-column-end: end;
@@ -1114,6 +1118,30 @@ body {
 }
 .modal__container::-webkit-scrollbar {
   display: none;
+}
+.modal__container__wrapper {
+  justify-self: flex-end;
+}
+.modal__container__title {
+  font-size: 1.6rem;
+  color: #100a37;
+  font-weight: 600;
+}
+.modal__container__text {
+  margin-top: 2rem;
+  color: #475569;
+  line-height: 2.4rem;
+}
+.modal__container__button {
+  cursor: pointer;
+  border: none;
+  background-color: #055df5;
+  color: white;
+  height: 5rem;
+  font-size: 1.3rem;
+  margin-bottom: 1.4rem;
+  margin-top: 2.4rem;
+  padding: 0 1rem;
 }
 .modal__description {
   margin-top: 1.3rem;

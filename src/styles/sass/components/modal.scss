@@ -10,6 +10,34 @@
     }
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
+    &__wrapper {
+      justify-self: flex-end;
+    }
+    &__title {
+      //justify-self: center;
+      font-size: 1.6rem;
+      color: $heading-color;
+      font-weight: 600;
+    }
+    &__text {
+      margin-top: 2rem;
+      //justify-self: center;
+      color: $text-color;
+      line-height: 2.4rem;
+    }
+    &__button {
+      cursor: pointer;
+      
+      
+      border: none;
+      background-color: #055df5;
+      color: white;
+      height: 5rem;
+      font-size: 1.3rem;
+      margin-bottom: 1.4rem;
+      margin-top: 2.4rem;
+      padding: 0 1rem;
+    }
   }
   &__description {
     margin-top: 1.3rem;

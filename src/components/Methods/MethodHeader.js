@@ -6,12 +6,14 @@ import { useState } from "react";
 import close from "../../image/close.svg";
 import { toast } from "react-toastify";
 import { Bars } from "react-loading-icons";
-
+import success from "../../image/success.svg";
+import { useNavigate } from "react-router-dom";
 export const MethodHeader = () => {
   const collection = useBonadocsStore((state) => state.collection);
   const [isOpen, setIsOpen] = useState(false);
   const [uri, setUri] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const customStyles = {
     overlay: {
       backgroundColor: "rgba(0, 0, 0, 0.60)",
@@ -127,7 +129,36 @@ export const MethodHeader = () => {
         <div className="modal__close" onClick={closeModal}>
           <img className="modal__close__img" src={close} />
         </div>
-        <div className="modal__container">{uri}</div>
+        <div className="modal__container">
+          <h3 className="modal__container__title">
+            Project succesfully published!
+          </h3>
+          {/* <img src={success} /> */}
+          <div className="modal__container__text">
+            {`Here's your collection link: https://collection.bonadocs.com//?uri=${uri}`}
+          </div>
+          <h5 className="modal__container__text">
+            Make sure to keep your link before starting a new project.
+          </h5>
+          <div className="modal__container__wrapper">
+            <button
+              className="modal__container__button"
+              onClick={() => {
+                localStorage.removeItem("collection");
+                localStorage.removeItem("current");
+                navigate(0);
+              }}
+            >
+              Start a New Project
+            </button>
+            <button
+              className="modal__container__button ml-2"
+              onClick={closeModal}
+            >
+              Continue your project.
+            </button>
+          </div>
+        </div>
       </Modal>
     </div>
   );
