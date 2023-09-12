@@ -25,7 +25,7 @@ export const SetupScreen = () => {
 
       <div className="contract__page__header">
         <div
-          onClick={() => setStatus(!status)}
+          onClick={() => setStatus(true)}
           className={clsx(
             "contract__page__header__item",
             status && "contract__page__header__item__active"
@@ -34,7 +34,7 @@ export const SetupScreen = () => {
           New Project
         </div>
         <div
-          onClick={() => setStatus(!status)}
+          onClick={() => setStatus(false)}
           className={clsx(
             "contract__page__header__item",
             !status && "contract__page__header__item__active"
