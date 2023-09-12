@@ -1,1 +1,0 @@
-export NPM_TOKEN=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
