@@ -33,7 +33,7 @@ export const MethodHeader = () => {
       minHeight: `20rem`,
       maxHeight: `70rem`,
       backgroundColor: "transparent",
-      width: "40%",
+      width: "50%",
       display: "grid",
     },
   };
@@ -135,7 +135,7 @@ export const MethodHeader = () => {
           </h3>
           {/* <img src={success} /> */}
           <div className="modal__container__text">
-            {`Here's your collection link: https://collection.bonadocs.com//?uri=${uri}`}
+            {`Here's your collection link: https://collection.bonadocs.com/?uri=${uri}`}
           </div>
           <h5 className="modal__container__text">
             Make sure to keep your link before starting a new project.
