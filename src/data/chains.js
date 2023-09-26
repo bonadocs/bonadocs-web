@@ -7,6 +7,7 @@ export const supportedChains = new Map([
       jsonRpcUrl: "https://bsc-dataseed.binance.org",
       blockscanUrl: "https://api.bscscan.com",
       blockscanType: "etherscan",
+      chain: "bscscan",
     },
   ],
   [
@@ -17,6 +18,7 @@ export const supportedChains = new Map([
       jsonRpcUrl: "https://eth.llamarpc.com",
       blockscanUrl: "https://api.etherscan.io",
       blockscanType: "etherscan",
+      chain: "ethereum",
     },
   ],
   [
@@ -27,6 +29,7 @@ export const supportedChains = new Map([
       jsonRpcUrl: "https://rpcapi.fantom.network",
       blockscanUrl: "https://api.ftmscan.com",
       blockscanType: "etherscan",
+      chain: "fantom",
     },
   ],
   [
@@ -37,6 +40,7 @@ export const supportedChains = new Map([
       jsonRpcUrl: "https://mainnet.optimism.io",
       blockscanUrl: "https://api-optimistic.etherscan.io",
       blockscanType: "etherscan",
+      chain: "optimism",
     },
   ],
   [
@@ -47,6 +51,7 @@ export const supportedChains = new Map([
       jsonRpcUrl: "https://arb1.arbitrum.io/rpc",
       blockscanUrl: "https://api.arbiscan.io",
       blockscanType: "etherscan",
+      chain: "arbitrum",
     },
   ],
   [
@@ -57,6 +62,7 @@ export const supportedChains = new Map([
       jsonRpcUrl: "https://api.avax.network/ext/bc/C/rpc",
       blockscanUrl: "https://api.snowtrace.io",
       blockscanType: "etherscan",
+      chain: "avanlanche",
     },
   ],
   [
@@ -67,6 +73,7 @@ export const supportedChains = new Map([
       jsonRpcUrl: "https://polygon.llamarpc.com",
       blockscanUrl: "https://api.polygonscan.com",
       blockscanType: "etherscan",
+      chain: "polygon",
     },
   ],
   [
@@ -77,6 +84,7 @@ export const supportedChains = new Map([
       jsonRpcUrl: "https://forno.celo.org",
       blockscanUrl: "https://api.celoscan.io",
       blockscanType: "etherscan",
+      chain: "celo",
     },
   ],
   [
@@ -87,6 +95,7 @@ export const supportedChains = new Map([
       jsonRpcUrl: "https://rpc.gnosischain.com",
       blockscanUrl: "https://api.gnosisscan.io/",
       blockscanType: "etherscan",
+      chain: "gnosis",
     },
   ],
   [
@@ -97,6 +106,7 @@ export const supportedChains = new Map([
       jsonRpcUrl: "https://rpc.ankr.com/eth_goerli",
       blockscanUrl: "https://api-goerli.etherscan.io",
       blockscanType: "etherscan",
+      chain: "goerli",
     },
   ],
   [
@@ -107,6 +117,7 @@ export const supportedChains = new Map([
       jsonRpcUrl: "https://endpoints.omniatech.io/v1/bsc/testnet/public",
       blockscanUrl: "https://api-testnet.bscscan.com",
       blockscanType: "etherscan",
+      chain: "bscscan testnet",
     },
   ],
   [
@@ -117,6 +128,7 @@ export const supportedChains = new Map([
       jsonRpcUrl: "https://rpc.bittorrentchain.io",
       blockscanUrl: "https://api.bttcscan.com",
       blockscanType: "etherscan",
+      chain: "btt chain",
     },
   ],
   [
@@ -127,6 +139,7 @@ export const supportedChains = new Map([
       jsonRpcUrl: "https://rpc.ankr.com/polygon_zkevm",
       blockscanUrl: "https://api-zkevm.polygonscan.com",
       blockscanType: "etherscan",
+      chain: "polygon zkevm",
     },
   ],
   [
@@ -137,6 +150,7 @@ export const supportedChains = new Map([
       jsonRpcUrl: "https://rpc.testnet.fantom.network",
       blockscanUrl: "https://api-testnet.ftmscan.com",
       blockscanType: "etherscan",
+      chain: "fantom testnet",
     },
   ],
   [
@@ -147,6 +161,7 @@ export const supportedChains = new Map([
       jsonRpcUrl: "https://api.avax-test.network/ext/bc/C/rpc",
       blockscanUrl: "https://api-testnet.snowtrace.io",
       blockscanType: "etherscan",
+      chain: "avalanche testnet",
     },
   ],
   [
@@ -157,6 +172,7 @@ export const supportedChains = new Map([
       jsonRpcUrl: "https://alfajores-forno.celo-testnet.org",
       blockscanUrl: "https://api-alfajores.celoscan.io",
       blockscanType: "etherscan",
+      chain: "celo testnet",
     },
   ],
   [
@@ -167,6 +183,7 @@ export const supportedChains = new Map([
       jsonRpcUrl: "https://rpc-mumbai.maticvigil.com",
       blockscanUrl: "https://api-testnet.polygonscan.com",
       blockscanType: "etherscan",
+      chain: "mumbai",
     },
   ],
   [
@@ -177,6 +194,7 @@ export const supportedChains = new Map([
       jsonRpcUrl: "https://goerli.arbitrum.io/rpc",
       blockscanUrl: "https://api-goerli.arbiscan.io",
       blockscanType: "etherscan",
+      chain: "arbitrum goerli",
     },
   ],
   [
@@ -187,6 +205,7 @@ export const supportedChains = new Map([
       jsonRpcUrl: "https://eth-sepolia.g.alchemy.com/v2/demo",
       blockscanUrl: "https://api-sepolia.etherscan.io",
       blockscanType: "etherscan",
+      chain: "sepholia",
     },
   ],
   [
@@ -197,6 +216,7 @@ export const supportedChains = new Map([
       jsonRpcUrl: "https://base.publicnode.com",
       blockscanUrl: "https://api.basescan.org",
       blockscanType: "etherscan",
+      chain: "base",
     },
   ],
 ]);
