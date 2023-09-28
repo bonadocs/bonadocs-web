@@ -14,6 +14,7 @@ import { configureChains, createConfig, sepolia, WagmiConfig } from "wagmi";
 import {
   mainnet,
   polygon,
+  base,
   optimism,
   arbitrum,
   zora,
@@ -43,6 +44,7 @@ const { chains, publicClient } = configureChains(
     arbitrum,
     zora,
     bsc,
+    base,
     fantom,
     avalanche,
     celo,
